@@ -12,7 +12,7 @@ Get mining specs on given GPUs
   <img src="https://imgur.com/5KxT8pi.png" width="600" height="500">
 </p><hr>
 
-### Compile Python code into Marshal from Termux, Windows or Linux. 
+### Get ETH mining stats on a given GPU
 <hr>
 
 <!--
