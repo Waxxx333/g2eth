@@ -15,13 +15,13 @@ Get mining specs on given GPUs
 ### Compile Python code into Marshal from Termux, Windows or Linux. 
 <hr>
 
-
+<!--
 |Feature            |Termux | Linux | Windows | WSL
 |-------------------|-----|-------|---|------------|
 | Get's hashrate    |✓    |✓      |✓  |   ✓
 | Daily/weekly/monthly profit |✓|✓|✓|✓ |
 | Projects est. ROI|✓|✓|✓|✓|
-
+-->
 ##### To run:
 ```shell
 git clone https://github.com/Waxxx333/g2eth
@@ -42,7 +42,7 @@ chmod +x g2eth
 > Todos
 
 - [ ] Make `install.sh` work with Winblows
-  - [x] Create `install.sh`
+  - [x] Create `README`
 
 <hr><hr>
 
