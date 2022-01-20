@@ -8,53 +8,63 @@ DRK=("\033[01;38;5;8m")
 WHT=("\033[01;38;5;15m")
 GRY=("\033[01;38;5;242m")
 echo -e "${DRK}Making ${GRN}${script} ${DRK}executable $(chmod +x ${script})"
-if grep -q "arch" /etc/os-release; then
-    export DISTRO="Arch"
-elif grep -q "debian" /etc/os-release; then
-    export DISTRO="Debian"
+if grep -qi "arch" /etc/os-release; then
+    export DISTRO="Arch" # pacman python-requests
+elif grep -qi "debian" /etc/os-release; then
+    export DISTRO="Debian" # apt python3-requests
+elif grep -qi 'fedora' /etc/os-release; then
+    export DISTRO="Fedora" #sudo yum/dnf install  
+elif grep -qi "opensuse" /etc/os-release; then
+    export DISTRO="openSUSE" # sudo zypper install python3-requests
 fi
 install_script() {
     # Where to install
     if [[ -d $HOME/.local/bin/fuck ]]; then
         echo -e "Copying to $HOME/.local/bin"
-        #cp ${script} $HOME/.local/bin
+        cp ${script} $HOME/.local/bin
     else
         echo -e "Copy file to /bin ? This will require your password."
         read -p ">>> " answer3
         if [[ ${answer3} == [yY] || ${answer3} == [yY][eE][sS] ]]; then
             chmod +x ${script}
-            #sudo cp ${script} /bin/
+            sudo cp ${script} /bin/
         elif [[ ${answer3} == [nN] || ${answer3} == [nN][oO] ]]; then
             echo -e "${GRN}You can still run the script with${PNK}:\n./${GRN}${script} ${DRK}[${RD}-u${PNK}/${RD}--usage ${PNK}| ${RD}-c${PNK}/${RD}--card ${WHT}(${GRN}3060lhr ${PNK}| ${RD}580${WHT}) ${PNK}| ${RD}-l${PNK}/${RD}--list${DRK}]"
             echo -e "${RD}Or${PNK}:\n${GRN}python3 ${script} ${DRK}[${RD}-u${PNK}/${RD}--usage ${PNK}| ${RD}-c${PNK}/${RD}--card ${PNK}| ${RD}-l${PNK}/${RD}--list${DRK}]"
         fi
     fi
 }
-get_pip() {
+get_requests() {
     if [[ ${DISTRO} == "Arch" ]]; then
         echo -e "${GRN}Arch${PNK}-${GRN}based ${DRK}distro detected ${PNK}:: ${DRK}Installing ${GRN}python${PNK}-${GRN}pip"
-        sudo pacman -S python-pip
-        get_requests
+        sudo pacman --noconfirm -S python-requests
+        command python3 -c "import requests; print(True)" &>/dev/null
+        if [[ $? == 0 ]]; then
+            install_script
+        else
+            echo -e "${RD}You're going to have to manually install requests."
+        fi
     elif [[ ${DISTRO} == "Debian" ]]; then
         echo -e "${GRN}Debian${PNK}-${GRN}based ${DRK}distro detected ${PNK}:: ${DRK}Installing ${GRN}python3${PNK}-${GRN}pip"
-        sudo apt install python3-pip
-        get_requests
-    fi
-}
-get_requests() {
-    command pip help &>/dev/null
-    if [[ $? != 0 ]]; then
-        echo -e "${RD}pip not found${PNK}. ${GRN}Install now to continue script installation ?"
-        read -p ">>> " answer2
-        if [[ ${answer2} == [yY] || ${answer2} == [yY][eE][sS] ]]; then
-            echo -e "${DRK}Installing ${GRN}pip"
-            get_pip
-        elif [[ ${answer2} == [nN] || ${answer2} == [nN][oO] ]]; then
-            echo -e "Aborting"
+        sudo apt-get -y install python3-requests
+        command python3 -c "import requests; print(True)" &>/dev/null
+        if [[ $? == 0 ]]; then
+            install_script
+        else
+            echo -e "${RD}You're going to have to manually install requests."
         fi
-    else
-        echo -e "${GRN}pip found"
-        pip install requests --user
+    elif [[ ${DISTRO} == "Fedora" ]]; then
+        echo -e "${GRN}Fedora${PNK}-${GRN}based ${DRK}distro detected ${PNK}:: ${DRK}Installing ${GRN}python3${PNK}-${GRN}pip"
+        sudo dnf install  python3-requests
+        command python3 -c "import requests; print(True)" &>/dev/null
+        if [[ $? == 0 ]]; then
+            install_script
+        else
+            echo -e "${RD}You're going to have to manually install requests."
+        fi
+    elif [[ ${DISTRO} == "openSUSE" ]]; then
+        echo -e "${GRN}Fedora${PNK}-${GRN}based ${DRK}distro detected ${PNK}:: ${DRK}Installing ${GRN}python3${PNK}-${GRN}pip"
+        sudo zypper install python3-requests
         command python3 -c "import requests; print(True)" &>/dev/null
         if [[ $? == 0 ]]; then
             install_script
@@ -63,7 +73,6 @@ get_requests() {
         fi
     fi
 }
-
 
 initialize() {
     command python3 -c "import requests; print(True)" &>/dev/null
