@@ -9,16 +9,15 @@ WHT=("\033[01;38;5;15m")
 GRY=("\033[01;38;5;242m")
 echo -e "${DRK}Making ${GRN}${script} ${DRK}executable $(chmod +x ${script})"
 if grep -qi "arch" /etc/os-release; then
-    export DISTRO="Arch" # pacman python-requests
+    export DISTRO="Arch" 
 elif grep -qi "debian" /etc/os-release; then
-    export DISTRO="Debian" # apt python3-requests
+    export DISTRO="Debian" 
 elif grep -qi 'fedora' /etc/os-release; then
-    export DISTRO="Fedora" #sudo yum/dnf install  
+    export DISTRO="Fedora" 
 elif grep -qi "opensuse" /etc/os-release; then
-    export DISTRO="openSUSE" # sudo zypper install python3-requests
+    export DISTRO="openSUSE" 
 fi
 install_script() {
-    # Where to install
     if [[ -d $HOME/.local/bin/fuck ]]; then
         echo -e "Copying to $HOME/.local/bin"
         cp ${script} $HOME/.local/bin
