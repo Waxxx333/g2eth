@@ -6,7 +6,7 @@ PRP=("\033[01;38;5;55m")
 GRN=("\033[01;38;5;10m")
 DRK=("\033[01;38;5;242m")
 WHT=("\033[01;38;5;15m")
-echo -e "${DRK}Getting ready to install ${script}"
+echo -e "${DRK}Getting ready to install ${GRN}${script}"
 echo -e "${DRK}Making ${GRN}${script} ${DRK}executable $(chmod +x ${script})"
 if grep -qi "arch" /etc/os-release; then
     export DISTRO="Arch" 
@@ -89,4 +89,4 @@ initialize() {
         fi
     fi
 }
-#initialize
+initialize
