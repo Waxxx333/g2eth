@@ -22,27 +22,17 @@ Get mining specs on given GPUs
 | Get's hashrate    |✓    |✓      |✓  |   ✓
 | Daily/weekly/monthly profit |✓|✓|✓|✓ |
 | Projects est. ROI|✓|✓|✓|✓|
+| Install script | ✓ | ✓ |  | ✓ |
 -->
-##### To run:
+##### Getting started:
 ```shell
 git clone https://github.com/Waxxx333/g2eth
 cd g2eth
-chmod +x g2eth
-./g2eth -u
-# GPU command format
-./g2eth -c 3070ti
-[-*-] NVIDIA RTX 3070 Ti [-*-]
-BTC Price: $41,825.5067 :: ETH Price: $3106
-ETH Hashrate: 57.62 Mh/s
-24h: $2.32/Weekly: $16.24/Monthly: $69.60
-Released: 2021 :: MSRP: $599
-ROI: 258 days :: Efficiency 0.310 Mh/w
-TDP: 290 watt :: Power: 186w
-
+chmod +x install.sh
 ```
 > Todos
 
-- [ ] Make `install.sh` work with Winblows
+  - [x] Make `install.sh` work with Winblows
   - [x] Create `README`
   - [x] Create `requirements.txt`
 
