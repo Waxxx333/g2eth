@@ -56,25 +56,37 @@ options:
  - `g2eth -c 3060` = 3060 Non-LHR 
  - `g2eth -c 2060s` Super cards (1660 Super | 2060 Super) 
  - Etc. . .
- ##### ***Using the*** `-l/--list` ***flag will show all cards capable of mining `ETH` and it will also give the name you need to use in the command to search the stats***
 
 ##### Example output:
 ```bash
 ┌──[яoot@ᴡɪɴᴅᴏᴡꜱ95]-<g2eth>
 └─⋗ g2eth -c 3060tilhr
 [-*-] NVIDIA RTX 3060 Ti LHR [-*-]
-[-*-] BTC Price: $42,048.8317 :: ETH Price: $3127
+[-*-] BTC Price: $38,964.0017 .::. ETH Price: $2861
 [-*-] ETH Hashrate: 45.05 Mh/s
-[-*-] 24h: $2.16 / Weekly: $15.12 / Monthly: $64.80
-[-*-] Released: 2021 :: MSRP: $499
-[-*-] ROI: 232 days :: Efficiency 0.309 Mh/w
-[-*-] TDP: 220 watt :: Power: 146w
+[-*-] 24h: $1.95 / Weekly: $13.65 / Monthly: $58.50
+[-*-] Released: 2021 .::. MSRP: $499
+[-*-] ROI: 256 days .::. Efficiency 0.309 Mh/w
+[-*-] TDP: 220 watt .::. Power: 146w
+``` 
+ ##### ***Using the*** `-l/--list` ***flag will show all cards capable of mining `ETH` and it will also give the name you need to use in the command to search the stats***
+###### `-l/--list` arg will give something like the following. The name after `Command name:` is the name you'll use to search the GPU by.
+```bash
+┌──[яoot@ᴡɪɴᴅᴏᴡꜱ95]-<g2eth>
+└─⋗ ./g2eth.py -l
+[-*-] Card name: NVIDIA GTX 1080 .:|:. Command name: 1080
+[-*-] Card name: AMD RX 6800 .:|:. Command name: 6800
+[-*-] Card name: NVIDIA CMP 90HX .:|:. Command name: cmp90
+[-*-] Card name: NVIDIA P106-100 .:|:. Command name: p106
 ```
+<hr>
+
 ###### Requirements: `python-requests` | but the installation script will attempt to install it. 
 |Feature            |Termux | Linux | Windows | WSL
 |-------------------|-----|-------|---|------------|
 | Installer Compatible with    |    |✓      |  |   ✓
-###### **For** ***Windows*** and ***Termux*** **you will have to manually install python-requests**. **You will need** `pip`. **I will be fixing this at some point.**
+###### **For** ***Windows*** and ***Termux*** **you will have to manually install python-requests**. **You will need `pip` if you're on Windows or Termux to install `requests`.** **I will be fixing this at some point. Right now the installer supports: **openSUSE, Arch-based distros, Debian-based distros and Fedora**
+###### **This script doesn't work for ***GTX 1050*** cards as because you need ***`>4GB`*** ***VRAM*** to mine ***ETH*****. 
 
 > Todos
 - [ ] Add more distros' package managers to the installer
