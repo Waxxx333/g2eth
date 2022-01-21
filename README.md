@@ -1,7 +1,8 @@
-![fff](https://img.shields.io/badge/Python-Requests-ff69b4.svg)
-![Python3](https://img.shields.io/badge/Python-ETH-orange.svg)
+![Script](https://img.shields.io/badge/WaXxX-g2eth-FF6800.svg)
 ![G2ETH](https://img.shields.io/badge/Python-G2ETH-8300FF.svg)
 ![Blah](https://img.shields.io/badge/Python-RE-FF5100.svg)
+![fff](https://img.shields.io/badge/python3-requests-740075.svg)
+![Blah](https://img.shields.io/badge/ETH-mining-00B2FF.svg)
 # ***G2ETH***
 #### ***Get mining stats on given GPUs***
 <p align="center">
