@@ -85,7 +85,7 @@ initialize() {
             echo -e "${GRN}Attempting to install requests"
             get_requests
         elif [[ ${answer1} == [nN] || ${answer1} == [nN][oO] ]]; then
-            echo -e "Aborting"
+            echo -e "${RD}Aborting"
         fi
     fi
 }

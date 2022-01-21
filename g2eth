@@ -2,7 +2,7 @@
 import requests, re, argparse, os, sys, random;
 from time import sleep;
 from decimal import Decimal as D;
-from platform import platform as getOS;
+#from platform import platform as getOS;
 DB=("\033[01;38;5;21m")
 RD=("\033[01;38;5;9m")
 PNK=("\033[01;38;5;13m")
@@ -17,15 +17,13 @@ RESET=("\033[0m")
 LOAD=("\033[1;49;32m")
 if (os.path.isdir('/data/data/com.termux')):
     OS = ('Termux')
-elif ('Linux') in (getOS()):
+elif ('linux') in (sys.platform):
     OS = ('Linux')
-elif ('Windows') in (getOS()):
+elif ('win') in (sys.platform):
     OS = ('Windows')
 script = (os.path.basename(sys.argv[0]))
 counter = [0]
-RANDOM = [('/', '-', '\\', '|'),  ('⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏') , ('◜','◠','◝','◞','◡','◟'),('↰','↱','↲','↳')]
-def multiply(A, B):
-    return (float(A) * float(B))
+CHARS = ('/', '-', '\\', '|')
 Agents = [
     'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36',
     'Mozilla/5.0 (X11; U; Linux x86_64; en-us) AppleWebKit/531.2+ (KHTML, like Gecko) Version/5.0 Safari/531.2+',
@@ -37,18 +35,8 @@ Agents = [
     'Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0',
     'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:77.0) Gecko/20100101 Firefox/77.0'
 ]
-def loading():	
-    CHARS = random.choice(RANDOM)
-    for i in range(10):
-        counter[0] += 1
-        sys.stdout.write('\r')
-        sys.stdout.write(f"{LOAD}%s{RESET}" % CHARS[counter[0] % len(CHARS)])
-        sys.stdout.flush()
-        sleep(.2)
-    sys.stdout.write("\b ")
-    return()
-def loading2(duration):	
-    CHARS = random.choice(RANDOM)
+
+def loading(duration):	
     for i in range(10):
         counter[0] += 1
         sys.stdout.write('\r')
@@ -58,15 +46,15 @@ def loading2(duration):
     sys.stdout.write("\b ")
     return()
 def echo(data):
-	blank = ' '
-	s = ''
-	for l in blank:
-		sys.stdout.write('\r')
-		sys.stdout.write(f"{DRK}[{GRN}-{GRN}♦{GRN}-{DRK}] {GRN}{data}")
-		s += (f"{l}")
-		sys.stdout.flush()
-		sleep(0.3)
-	sys.stdout.write("\n")
+    blank = ' '
+    s = ''
+    for l in blank:
+        sys.stdout.write('\r')
+        sys.stdout.write(f"{DRK}[{GRN}-{GRN}*{GRN}-{DRK}] {GRN}{data}")
+        s += (f"{l}")
+        sys.stdout.flush()
+        sleep(0.3)
+        sys.stdout.write("\n")
 def icon():
     icon = (f"""
                    ..
@@ -122,7 +110,7 @@ class get():
         args = parser.parse_args()
         if args.list:
             icon()
-            loading()
+            loading(.2)
             self.list_cards()
             exit(0)
         if args.usage:
@@ -132,7 +120,7 @@ class get():
             pass
         if args.card:
             if args.card == ('1050') or args.card == ('1050ti'):
-                data = (f"{RD}\u2639 {RD} The {GRN}GTX {WHT}1050{PNK}/{WHT}1050{GRN}ti {RD}cannot be used to mine {GRN}ETH {RD}\u2639  {DRK}[{GRN}-{GRN}♦{GRN}-{DRK}]")
+                data = (f"{RD}\u2639 {RD} The {GRN}GTX {WHT}1050{PNK}/{WHT}1050{GRN}ti {RD}cannot be used to mine {GRN}ETH {RD}\u2639  {DRK}[{GRN}-{GRN}*{GRN}-{DRK}]")
                 echo(data)
                 data = (f"{GRY}Mining {GRN}ETH {GRY}requires {RD}>4GB {GRN}VRAM")
                 echo(data)
@@ -214,68 +202,68 @@ class get():
         except:
             roi = ('N/A')
         if "NVIDIA" in gpu:
-            gpu_name = (f"{NVD}{gpu}{RESET} {DRK}[{GRN}-{GRN}♦{GRN}-{DRK}]")
+            gpu_name = (f"{NVD}{gpu}{RESET} {DRK}[{GRN}-{GRN}*{GRN}-{DRK}]")
             data = (f"{gpu_name}")
             echo(data)
-            loading()
-            data = (f"{DRK}BTC Price{PNK}: {GRN}${GRN}{btc_price} {PNK}:: {DRK}ETH Price{PNK}: {GRN}{eth_price}")
+            loading(.2)
+            data = (f"{DRK}BTC Price{PNK}: {GRN}${GRN}{btc_price} {PNK}.::. {DRK}ETH Price{PNK}: {GRN}{eth_price}")
             echo(data)
-            loading2(0.05)
-            data = (f"{DRK}ETH Hashrate{PNK}: {GRN}{eth_rate} {PNK}") #{PNK}:: {DRK}RVN Hashrate{PNK}: {GRN}{rvn_rate}")
+            loading(0.05)
+            data = (f"{DRK}ETH Hashrate{PNK}: {GRN}{eth_rate} {PNK}") 
             echo(data)
-            loading2(0.05)
+            loading(0.05)
             data = (f"{DRK}24h{PNK}: {GRN}{oneday}{PNK} / {DRK}Weekly{PNK}: {GRN}${weekly}{PNK} / {DRK}Monthly{PNK}: {GRN}${monthly}")
             echo(data)
-            loading2(0.05)
-            data = (f"{DRK}Released{PNK}: {GRN}{release_date} {PNK}:: {DRK}MSRP{PNK}: {GRN}{msrp} ")
+            loading(0.05)
+            data = (f"{DRK}Released{PNK}: {GRN}{release_date} {PNK}.::. {DRK}MSRP{PNK}: {GRN}{msrp} ")
             echo(data)
-            loading2(0.05)
-            data = (f"{DRK}ROI{PNK}: {GRN}{roi} {PNK}:: {DRK}Efficiency{PNK} {GRN}{efficiency}")
+            loading(0.05)
+            data = (f"{DRK}ROI{PNK}: {GRN}{roi} {PNK}.::. {DRK}Efficiency{PNK} {GRN}{efficiency}")
             echo(data)
-            loading2(0.05)
-            data = (f"{DRK}TDP{PNK}: {GRN}{tdp} {PNK}:: {DRK}Power{PNK}: {GRN}{power}")
+            loading(0.05)
+            data = (f"{DRK}TDP{PNK}: {GRN}{tdp} {PNK}.::. {DRK}Power{PNK}: {GRN}{power}")
             echo(data)          
         elif "AMD" in gpu:
-            gpu_name = (f"{AMD}{gpu}{RESET} {DRK}[{GRN}-{GRN}♦{GRN}-{DRK}]")
+            gpu_name = (f"{AMD}{gpu}{RESET} {DRK}[{GRN}-{GRN}*{GRN}-{DRK}]")
             data = (f"{gpu_name}")
             echo(data)
-            loading()
-            data = (f"{DRK}BTC Price{PNK}: {RD}${btc_price} {PNK}:: {DRK}ETH Price{PNK}: {RD}{eth_price}")
+            loading(.2)
+            data = (f"{DRK}BTC Price{PNK}: {RD}${btc_price} {PNK}.::. {DRK}ETH Price{PNK}: {RD}{eth_price}")
             echo(data)
-            loading2(0.05)
-            data = (f"{DRK}ETH Hashrate{PNK}: {RD}{eth_rate} {PNK}") #{PNK}:: {DRK}RVN Hashrate{PNK}: {GRN}{rvn_rate}")
+            loading(0.05)
+            data = (f"{DRK}ETH Hashrate{PNK}: {RD}{eth_rate} {PNK}") 
             echo(data)
-            loading2(0.05)
+            loading(0.05)
             data = (f"{DRK}24h{PNK}: {RD}{oneday}{PNK}/{DRK}Weekly{PNK}: {RD}${weekly}{PNK}/{DRK}Monthly{PNK}: {RD}${monthly}")
             echo(data)
-            loading2(0.05)
-            data = (f"{DRK}Released{PNK}: {RD}{release_date} {PNK}:: {DRK}MSRP{PNK}: {RD}{msrp} ")
+            loading(0.05)
+            data = (f"{DRK}Released{PNK}: {RD}{release_date} {PNK}.::. {DRK}MSRP{PNK}: {RD}{msrp} ")
             echo(data)
-            loading2(0.05)
-            data = (f"{DRK}ROI{PNK}: {RD}{roi} {PNK}:: {DRK}Efficiency{PNK} {RD}{efficiency}")
+            loading(0.05)
+            data = (f"{DRK}ROI{PNK}: {RD}{roi} {PNK}.::. {DRK}Efficiency{PNK} {RD}{efficiency}")
             echo(data)
-            loading2(0.05)
-            data = (f"{DRK}TDP{PNK}: {RD}{tdp} {PNK}:: {DRK}Power{PNK}: {RD}{power}")
+            loading(0.05)
+            data = (f"{DRK}TDP{PNK}: {RD}{tdp} {PNK}.::. {DRK}Power{PNK}: {RD}{power}")
             echo(data)
             
     def list_cards(self):
         page = (f'https://www.hashrate.no/')
         retrieve = (self.session.get(page).text)
         all_cards = (list(set(re.findall(f"href=/(.*?)>", retrieve))))
-        loading()
+        loading(.2)
         for a in all_cards:
             all_cards_clean = (list(set(re.findall(f"href=/{a}>(.*?)</a>", retrieve))))
             for card in all_cards_clean:
                 if "NVIDIA" in card:
-                    data = (f"{DRK}Card name{PNK}: {GRN}{card} {PNK}| {DRK}Search name{PNK}: {GRN}{a}")
+                    data = (f"{DRK}Card name{PNK}: {NVD}{card}{RESET} {PNK}.:|:. {DRK}Command name{PNK}: {GRN}{a}")
                     echo(data)
-                    loading2(0.02)
+                    loading(0.02)
                 elif "AMD" in card:
-                    data = (f"{DRK}Card name{PNK}: {RD}{card} {PNK}| {DRK}Search name{PNK}: {RD}{a}")
+                    data = (f"{DRK}Card name{PNK}: {AMD}{card}{RESET} {PNK}.:|:. {DRK}Command name{PNK}: {RD}{a}")
                     echo(data)
-                    loading2(0.02)
+                    loading(0.02)
                 else:
-                    data = (f"{DRK}Card name{PNK}: {GRN}{card} {PNK}| {DRK}Search name{PNK}: {GRN}{a}")
+                    data = (f"{DRK}Card name{PNK}: {GRN}{card} {PNK}.:|:. {DRK}Command name{PNK}: {GRN}{a}")
                     echo(data)
-                    loading2(0.02)
+                    loading(0.02)
 get()
