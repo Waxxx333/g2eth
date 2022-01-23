@@ -83,9 +83,10 @@ options:
 <hr>
 
 ###### Requirements: `python-requests` | but the installation script will attempt to install it. 
+<!--
 |Feature            |Termux | Linux | Windows | WSL
 |-------------------|-----|-------|---|------------|
-| Installer Compatible with    |    |✓      |  |   ✓
+| Installer Compatible with    |    |✓      |  |   ✓-->
 ###### **For** ***Windows*** and ***Termux*** **you will have to manually install python-requests**. **You will need `pip` if you're on Windows or Termux to install `requests`.** **I will be fixing this at some point. Right now the installer supports: **openSUSE, Arch-based distros, Debian-based distros and Fedora**
 ###### **This script doesn't work for ***GTX 1050*** cards as because you need ***`>4GB`*** ***VRAM*** to mine ***ETH*****. 
 
