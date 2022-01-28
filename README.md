@@ -1,11 +1,12 @@
-![Script](https://img.shields.io/badge/WaXxX-g2eth-FF6800.svg)
-![G2ETH](https://img.shields.io/badge/Python-G2ETH-8300FF.svg)
-![Blah](https://img.shields.io/badge/Python-RE-FF5100.svg)
-![fff](https://img.shields.io/badge/python3-requests-740075.svg)
-![Blah](https://img.shields.io/badge/ETH-mining-00B2FF.svg)
+![g](https://img.shields.io/badge/GitHub-%2312100E.svg?&style=plastic&logo=Github&logoColor=BF5B16)
+![Script](https://img.shields.io/badge/WaXxX-G2ETH-BF5B16?style=plastic&logo=Ethereum)
+![Blah](https://img.shields.io/badge/Python3-RE-7A297B?style=plastic&logo=Python)
+![fff](https://img.shields.io/badge/Python3-Requests-7A297B?style=plastic&logo=Python)
+
 # ***G2ETH***
 #### ***Get mining stats on given GPUs***
 <p align="center">
+  <img width="300" height="300" src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/python.svg">
   <img width="300" height="300" src="https://imgur.com/KHidht1.png">
 </p>
 <!--
@@ -15,28 +16,19 @@
 <hr>
 
 ### Get ETH mining stats on a given GPU
-##### **Returns current Bitcoin price, current ***ETH*** price, ***ETH*** hashrate of the given GPU, daily, weekly and monthly estimated profit, year the GPU was released, ROI(Return of Investment), Power consumption, efficiency and TDP. Also lists all 54 cards capable of mining ***ETH*** and their ***ETH*** mining stats.**
+##### **Returns current Bitcoin price, current ***ETH*** price, ***ETH*** hashrate of the given GPU, daily, weekly and monthly estimated profit, year the GPU was released, ROI(Return of Investment), Power consumption, efficiency and TDP. Also lists all 54 cards capable of mining ***ETH*** and their ***ETH*** mining stats.** ***g2eth*** also has a USD/GBP to ETH converter and vice versa.
 <hr>
 
 ##### To install:
-```shell
-git clone https://github.com/Waxxx333/g2eth
+```python
+git clone https://github.com/Waxxx333/g2eth.git
 cd g2eth
 chmod +x install.sh
-./install.sh
 ┌──[яoot@ᴡɪɴᴅᴏᴡꜱ95]-<g2eth>
-└─⋗ g2eth -h
-g2eth.py GPU ETH mining stats
-
-options:
-  -c CARD, --card CARD  GPU to search for
-  -h, --help            Show this help menu
-  -u, --usage           Advanced Usage
-  -l, --list            List all cards capable of mining ETH
-
+└─⋗ ./install.sh
 ```
 ##### Or simply run it:
-```bash
+```python
 https://github.com/Waxxx333/g2eth
 cd g2eth
 chmod +x g2eth
@@ -45,56 +37,92 @@ chmod +x g2eth
 g2eth.py GPU ETH mining stats
 
 options:
-  -c CARD, --card CARD  GPU to search for
+  -g GPU, --gpu GPU     GPU to search for
   -h, --help            Show this help menu
   -u, --usage           Advanced Usage
   -l, --list            List all cards capable of mining ETH
+  -d, --all             List all cards capable of mining ETH and their stats
+  -c CONVERT, --convert CONVERT | Currency to conver ETH/USD/GBP
+  -i INTO, --into INTO | Currency to convert into ETH/USD/GBP
+  -n AMOUNT, --amount AMOUNT | Amount to convert
 ```
 #### Command formatting: 
- - `g2eth -c 3060ti` = 3060 Ti Non-LHR
- - `g2eth -c 3060tilhr` = 3060 Ti LHR 
- - `g2eth -c 3060lhr` = 3060 LHR 
- - `g2eth -c 3060` = 3060 Non-LHR 
- - `g2eth -c 2060s` Super cards (1660 Super | 2060 Super) 
+ - <kbd>g2eth -g 3060ti</kbd> = 3060 Ti Non-LHR
+ - <kbd>g2eth -g 3060tilhr</kbd> = 3060 Ti LHR 
+ - <kbd>g2eth -g 3060lhr</kbd> = 3060 LHR 
+ - <kbd>g2eth -g 3060</kbd> = 3060 Non-LHR 
+ - <kbd>g2eth -g 2060s</kbd> Super cards (1660 Super | 2060 Super) 
  - Etc. . .
 
 ##### Example output:
-```bash
+```python
 ┌──[яoot@ᴡɪɴᴅᴏᴡꜱ95]-<g2eth>
-└─⋗ g2eth -c 3060tilhr
-[-*-] NVIDIA RTX 3060 Ti LHR [-*-]
-[-*-] BTC Price: $38,964.0017 .::. ETH Price: $2861
-[-*-] ETH Hashrate: 45.05 Mh/s
-[-*-] 24h: $1.95 / Weekly: $13.65 / Monthly: $58.50
-[-*-] Released: 2021 .::. MSRP: $499
-[-*-] ROI: 256 days .::. Efficiency 0.309 Mh/w
-[-*-] TDP: 220 watt .::. Power: 146w
+└─⋗ g2eth -g 3060tilhr
+[■] NVIDIA RTX 3080 LHR [■]
+[■] BTC Price: $37,280.0200 .::. ETH Price: $2448 .::. Up: 2.7543
+[■] ETH Hashrate(DaggerHashimoto): 71.70 Mh/s
+[■] 24h: $2.15 / Weekly: $15.05 / Monthly: $64.50
+[■] Released: 2021 .::. MSRP: $999
+[■] ROI: 465 days .::. Efficiency 0.316 Mh/w
+[■] TDP: 320 watt .::. Power: 227w
 ``` 
- ##### ***Using the*** `-l/--list` ***flag will show all cards capable of mining `ETH` and it will also give the name you need to use in the command to search the stats***
-###### `-l/--list` arg will give something like the following. The name after `Command name:` is the name you'll use to search the GPU by.
-```bash
+ ##### ***Using the*** <kbd>-l/--list</kbd> ***flag will show all cards capable of mining <kbd>ETH</kbd> and it will also give the name you need to use in the command to search the stats***
+###### <kbd>-l/--list</kbd> arg will give something like the following. The name after <kbd>Command name:</kbd> is the name you'll use to search the GPU by.
+```python
 ┌──[яoot@ᴡɪɴᴅᴏᴡꜱ95]-<g2eth>
 └─⋗ ./g2eth.py -l
-[-*-] Card name: NVIDIA GTX 1080 .:|:. Command name: 1080
-[-*-] Card name: AMD RX 6800 .:|:. Command name: 6800
-[-*-] Card name: NVIDIA CMP 90HX .:|:. Command name: cmp90
-[-*-] Card name: NVIDIA P106-100 .:|:. Command name: p106
+[■] Card name: NVIDIA GTX 1080 .:|:. Command name: 1080
+[■] Card name: AMD RX 6800 .:|:. Command name: 6800
+[■] Card name: NVIDIA CMP 90HX .:|:. Command name: cmp90
+[■] Card name: NVIDIA P106-100 .:|:. Command name: p106
+```
+##### Convert USD/GBP to ETH or ETH to USD/GBP <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-light-mode-only" alt="python" align=left width=24><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-dark-mode-only" alt="python" align=left width=24><br>
+```python
+g2eth --convert/-c [USD/GBP/ETH] --into/-i [USD/GBP/ETH] --amount/-n [AMOUNT]
+┌──[яoot@ᴡɪɴᴅᴏᴡꜱ95]-<g2eth>
+└─⋗ g2eth.py --convert eth --into usd --amount 20
+[■] Converting: ♦20.0 ETH into: $48508.72 USD [■]
 ```
 <hr>
 
-###### Requirements: `python-requests` | but the installation script will attempt to install it. 
+###### Requirements: <kbd>python-requests</kbd> | but the installation script will attempt to install it. 
 <!--
 |Feature            |Termux | Linux | Windows | WSL
 |-------------------|-----|-------|---|------------|
 | Installer Compatible with    |    |✓      |  |   ✓-->
-###### **For** ***Windows*** and ***Termux*** **you will have to manually install python-requests**. **You will need `pip` if you're on Windows or Termux to install `requests`.** **I will be fixing this at some point. Right now the installer supports: **openSUSE, Arch-based distros, Debian-based distros and Fedora**
-###### **This script doesn't work for ***GTX 1050*** cards as because you need ***`>4GB`*** ***VRAM*** to mine ***ETH*****. 
+###### **For** ***Windows*** and ***Termux*** **you will have to manually install python-requests**. **You will need <kbd>pip</kbd> if you're on Windows or Termux to install <kbd>requests</kbd>.** **I will be fixing this at some point. Right now the installer supports: **openSUSE, Arch-based distros, Debian-based distros and Fedora**
+###### **This script doesn't work for ***GTX 1050*** cards as because you need ***<kbd>>4GB</kbd>*** ***VRAM*** to mine ***ETH*****. 
 
 > Todos
 - [ ] Add more distros' package managers to the installer
 - [ ] Make installer work in Winblows
 - [ ] Make installer work with Termux
-  - [x] <strike>***Make `install.sh`***</strike> 
-  - [x] <strike>***Create `requirements.txt`***</strike>
+- [ ] Make STDOUT <kbd>prettier</kbd> on Termux
+  - [x] <strike>***Make <kbd>install.sh</kbd>***</strike> 
+  - [x] <strike>***Create <kbd>requirements.txt</kbd>***</strike>
+
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg" width="75" height="75">
+  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/python.svg" width="75" height="75">
+  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/amd.svg" width="75" height="75">
+  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/nvidia.svg" width="75" height="75">
+</p>
+
+### Author: WaXxX
+<a href="https://twitter.com/waxxx333"><img src="https://img.shields.io/badge/-WaXxX-E34F26?style=plastic&logo=Windows%2095&logoColor=white"></a>
 
 <hr><hr>
+<!--
+* 0.0.1
+    * Work in progress
+-->
+
+<details>
+  <summary><kbd>Recent updates</kbd></summary>
+  <ul>
+    <li><b>Added function to convert ETH to USD/GBP and vice versa</li>
+    <li><b>Added function to list ALL cards and all of their stats</li>
+    <li><b>Shows <kbd>+/-</kbd> ETH</li>
+    </ul>
+</details>
