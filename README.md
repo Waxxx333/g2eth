@@ -5,21 +5,18 @@
 ![Blah](https://img.shields.io/badge/Python3-RE-7A297B?style=plastic&logo=Python)
 ![fff](https://img.shields.io/badge/Python3-Requests-7A297B?style=plastic&logo=Python)
 
-
 # ***G2ETH***
-#### ***Get mining stats on given GPUs && more***
 <p align="center">
   <img width="300" height="300" src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/python.svg">
   <img width="300" height="300" src="https://imgur.com/KHidht1.png">
 </p>
-<!--
-<p align="center">
-  <img src="https://imgur.com/5KxT8pi.png" width="600" height="500">
-</p><hr>-->
+
 <hr>
 
 ### Get ETH mining stats on a given GPU
-##### **Returns current Bitcoin price, current ***ETH*** price, ***ETH*** hashrate of the given GPU, daily, weekly and monthly estimated profit, year the GPU was released, ROI(Return of Investment), Power consumption, efficiency and TDP. Also lists all 54 cards capable of mining ***ETH*** and their ***ETH*** mining stats.** ***g2eth*** also has a USD/GBP/CAD to ETH converter and vice versa.
+##### **Returns current Bitcoin price, current ***ETH*** price, ***ETH*** hashrate of the given GPU, daily, weekly and monthly estimated profit, year the GPU was released, ROI(Return of Investment), Power consumption, efficiency and TDP.** 
+##### **Lists all cards capable of mining ***ETH*** and their ***ETH*** mining stats.** ***g2eth*** **also has a USD/GBP/CAD/EUR to ETH converter and vice versa.**
+##### **Check the current ETH and BTC prices.**
 <hr>
 
 ##### To install:
@@ -45,7 +42,7 @@ options:
   -u, --usage           Advanced Usage
   -l, --list            List all cards capable of mining ETH
   -d, --all             List all cards capable of mining ETH and their stats
-  -p, --price           List all cards capable of mining ETH and their stats
+  -p, --price           Show BTC and ETH price
   -c CONVERT, --convert CONVERT | Currency to conver ETH/USD/GBP
   -i INTO, --into INTO | Currency to convert into ETH/USD/GBP
   -n AMOUNT, --amount AMOUNT | Amount to convert
@@ -80,9 +77,9 @@ options:
 [■] Card name: NVIDIA CMP 90HX .:|:. Command name: cmp90
 [■] Card name: NVIDIA P106-100 .:|:. Command name: p106
 ```
-##### Convert USD/GBP/CAD to ETH or ETH to USD/GBP/CAD <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-light-mode-only" alt="python" align=left width=24><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-dark-mode-only" alt="python" align=left width=24><br>
+##### Convert USD/GBP/CAD/EUR to ETH or ETH to USD/GBP/CAD/EUR <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-light-mode-only" alt="python" align=left width=24><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-dark-mode-only" alt="python" align=left width=24><br>
 ```python
-g2eth --convert/-c [USD/GBP/CAD/ETH] --into/-i [USD/GBP/CAD/ETH] --amount/-n [AMOUNT]
+g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amount/-n [AMOUNT]
 ┌──[яoot@ᴡɪɴᴅᴏᴡꜱ95]-<g2eth>
 └─⋗ g2eth.py --convert eth --into usd --amount 20
 [■] Converting: ♦20.0 ETH into: $48508.72 USD [■]
@@ -97,15 +94,15 @@ g2eth --convert/-c [USD/GBP/CAD/ETH] --into/-i [USD/GBP/CAD/ETH] --amount/-n [AM
 ###### **For** ***Windows*** and ***Termux*** **you will have to manually install python-requests**. **You will need <kbd>pip</kbd> if you're on Windows or Termux to install <kbd>requests</kbd>.** **I will be fixing this at some point. Right now the installer supports: **openSUSE, Arch-based distros, Debian-based distros and Fedora**
 ###### **This script doesn't work for ***GTX 1050*** cards as because you need ***<kbd>>4GB</kbd>*** ***VRAM*** to mine ***ETH*****. 
 
-> Todos
+* To Do
 - [ ] Add more distros' package managers to the installer
 - [ ] Make installer work in Winblows
 - [ ] Make installer work with Termux
 - [ ] Make STDOUT <kbd>prettier</kbd> on Termux
 - [ ] Work on bash and zsh completion
 - [ ] Maybe a side-by-side comparison function
-- [ ] Add current ETH price function
-  - [x] Add Canadian Dollars
+  - [x] <strike>***Add current ETH price function***</strike>
+  - [x] <strike>***Add Canadian Dollars***</strike>
   - [x] <strike>***Make <kbd>install.sh</kbd>***</strike> 
   - [x] <strike>***Create <kbd>requirements.txt</kbd>***</strike>
 
@@ -133,5 +130,7 @@ g2eth --convert/-c [USD/GBP/CAD/ETH] --into/-i [USD/GBP/CAD/ETH] --amount/-n [AM
     <li><b>Added function to convert ETH to USD/GBP and vice versa</li>
     <li><b>Added function to list ALL cards and all of their stats</li>
     <li><b>Shows <kbd>+/-</kbd> ETH</li>
+    <li>Added price function</li>
+    <li>Added CAD and EUR to the converter</li>
     </ul>
 </details>
