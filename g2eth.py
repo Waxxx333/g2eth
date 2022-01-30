@@ -1,4 +1,6 @@
 #!/bin/python3
+from json import load
+from locale import currency
 import requests, re, argparse, os, sys, random;
 from time import sleep;
 from decimal import Decimal as D;
@@ -14,7 +16,7 @@ NVD=("\033[1;42;97m")
 AMD=("\033[1;41;97m")
 RESET=("\033[0m")
 LOAD=("\033[1;49;32m")
-version = (0.9)
+version = (1.1)
 if (os.path.isdir('/data/data/com.termux')):
     OS = ('Termux')
 elif ('linux') in (sys.platform):
@@ -25,6 +27,7 @@ script = (os.path.basename(sys.argv[0]))
 if ('.py') in script:
     script = (script.split('.')[0])
 counter = [0]
+currency_options = ['usd', 'gbp', 'cad', 'eur', 'eth']
 CHARS = ('/', '-', '\\', '|')
 Agents = [
     'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36',
@@ -103,8 +106,8 @@ def usage():
 {PNK}./{GRN}{script} {RD}-l{PNK}/{RD}--list
 {GRY}Now has the ability to convert {GRN}GBP{PNK}, {GRN}CAD {GRY}or {GRN}USD {GRY}to {GRN}ETH {GRY}and vice versa{PNK}.
 {GRY}Options{PNK}: 
-{GRN}{script} {RD}-c{PNK}/{RD}--currency {WHT}({GRN}eth {PNK} | {GRN}usd {PNK}| {GRN} cad {PNK}| {GRN} gbp{WHT}) {RD}-t{PNK}/{RD}--to {WHT}({GRN}eth {PNK} | {GRN}usd {PNK}| {GRN} gbp {PNK}| {GRN} cad{WHT}) {RD}-n{PNK}/{RD}--amount {GRN}10
-{GRY}Example syntax to convert {RD}0{PNK}.{RD}2 {GRN}ETH {GRY}into {GRN}GBP{PNK}/{GRN}USD{PNK}/{GRN}CAD{PNK}:
+{GRN}{script} {RD}-c{PNK}/{RD}--currency {WHT}({GRN}eth{PNK}|{GRN}usd{PNK}|{GRN}cad{PNK}|{GRN}gbp{PNK}|{GRN}cad{WHT}) {RD}-i{PNK}/{RD}--into {WHT}({GRN}eth{PNK}|{GRN}usd{PNK}|{GRN}gbp{PNK}|{GRN}cad{PNK}|{GRN}eur{WHT}) {RD}-n{PNK}/{RD}--amount {GRN}10
+{GRY}Example syntax to convert {RD}0{PNK}.{RD}2 {GRN}ETH {GRY}into {GRN}GBP{PNK}/{GRN}USD{PNK}/{GRN}CAD{PNK}/{GRN}EUR{PNK}:
 {GRN}{script} {RD}-c {GRN}eth {RD}-t {GRN}gbp {RD}-n {GRN}0.2 
 {GRY}Or convert {GRN}$175 USD {GRY}into {GRN}ETH{PNK}:
 {GRN}{script} {RD}-c {GRN}usd {RD}-t {GRN}eth {RD}-n {GRN}175
@@ -115,17 +118,21 @@ class get():
     def __init__(self) -> None:
         self.session = requests.Session()
         self.session.headers.update({'User-Agent':f"{random.choice(Agents)}"})
-        parser = argparse.ArgumentParser(description=f'{GRN}{script} GPU ETH mining stats',add_help=False)
+        parser = argparse.ArgumentParser(description=f'{GRN}{script} ETH mining stats',add_help=False)
         parser.add_argument('-g', '--gpu', required=False, action=('store'),help=(f'{GRN}GPU to search for'))
         parser.add_argument('-h', '--help',action='help', default=argparse.SUPPRESS,help=(f'Show this help menu'))
         parser.add_argument('-u', '--usage' ,required=False, action=('store_true'), help=(f"Advanced Usage"))
         parser.add_argument('-v', '--version' ,required=False, action=('store_true'), help=(f"{script} Version"))
         parser.add_argument('-l', '--list' ,required=False, action=('store_true'), help=(f"List all cards capable of mining ETH"))
         parser.add_argument('-d', '--all' ,required=False, action=('store_true'), help=(f"List all cards capable of mining ETH and their stats"))
-        parser.add_argument('-c', '--convert' ,required=False, action=('store'),type=(str.lower), help=(f"Currency to conver ETH/USD/GBP/CAD"))
-        parser.add_argument('-i', '--into' ,required=False, action=('store'),type=(str.lower), help=(f"Currency to convert into ETH/USD/GBP/CAD"))
+        parser.add_argument('-p', '--price' ,required=False, action=('store_true'), help=(f"Show BTC and ETH price"))
+        parser.add_argument('-c', '--convert' ,required=False, action=('store'),type=(str.lower), help=(f"Currency to conver ETH/USD/GBP/CAD/EUR"))
+        parser.add_argument('-i', '--into' ,required=False, action=('store'),type=(str.lower), help=(f"Currency to convert into ETH/USD/GBP/CAD/EUR"))
         parser.add_argument('-n', '--amount' ,required=False, action=('store'),type=(float), help=(f"Amount to convert"))
         args = (parser.parse_args())
+        if args.price:
+            loading(0.05)
+            self.get_current_price()
         if args.version:
             icon()
             data = (f"{DRK}Version: {GRN}{script} {PNK}{version} {DRK}[{GRN}■{DRK}]")
@@ -144,8 +151,12 @@ class get():
                     data = (f"{RD}Error{PNK}: {DRK}You must supply an amount to convert {DRK}[{RD}■{DRK}]")
                     echo(data)
                     exit(0);
+                if to_convert not in ['usd'.casefold(), 'gbp'.casefold(), 'cad'.casefold(), 'eur'.casefold(), 'eth'.casefold()]:
+                    data = (f"{RD}Error{PNK}: {RD}{to_convert} {DRK}is not a supported currency{PNK}. {DRK}Acceptable currencies are{PNK}: {GRN}USD{PNK},{GRN}GBP{PNK},{GRN}EUR{PNK},{GRN}CAD")
+                    echo(data)
+                    exit(0);
                 if len(args.convert) != (3):
-                    data = (f"{RD}Error {PNK}'{RD}{args.convert}{PNK}' {DRK}not recognized{PNK}: {RD}Options are{PNK}: {GRN}eth{PNK}, {GRN}usd{PNK}, {GRN}gbp{PNK},{GRN}cad {DRK}[{RD}■{DRK}]")
+                    data = (f"{RD}Error {PNK}'{RD}{args.convert}{PNK}' {DRK}not recognized{PNK}: {RD}Options are{PNK}: {GRN}eth{PNK}, {GRN}usd{PNK}, {GRN}gbp{PNK},{GRN}cad{PNK},{GRN} eur {DRK}[{RD}■{DRK}]")
                     echo(data)
                 if ('eth') in (to_convert):
                     currency = ('ethereum')
@@ -153,14 +164,20 @@ class get():
                     currency = ('usd')
                 elif ('gbp') in (to_convert):
                     currency = ('gbp')
+                elif ('eur') in (to_convert):
+                    currency = ('eur')
                 elif ('cad') in (to_convert):
                     currency = ('cad')
-                
                 if len(args.into) <= (2):
-                    data = (f"{RD}Error {PNK}'{RD}{args.into}{PNK}' {DRK}not recognized{PNK}: {RD}Options are{PNK}: {GRN}eth{PNK}, {GRN}usd{PNK}, {GRN}gbp{PNK},{GRN}cad {DRK}[{RD}■{DRK}]")
+                    data = (f"{RD}Error {PNK}'{RD}{args.into}{PNK}' {DRK}not recognized{PNK}: {RD}Options are{PNK}: {GRN}eth{PNK}, {GRN}usd{PNK}, {GRN}gbp{PNK},{GRN}cad{PNK}, {GRN}eur {DRK}[{RD}■{DRK}]")
                     echo(data)
                 else:
                     convert_to = (args.into)
+                    if convert_to not in ['usd'.casefold(), 'gbp'.casefold(), 'cad'.casefold(), 'eur'.casefold(), 'eth'.casefold()]:
+                        data = (f"{RD}Error{PNK}: {RD}{to_convert} {DRK}is not a supported currency{PNK}. {DRK}Acceptable currencies are{PNK}: {GRN}USD{PNK},{GRN}GBP{PNK},{GRN}EUR{PNK},{GRN}CAD")
+                        echo(data)
+                        exit(0);
+                loading(0.05)
                 self.convert(currency,amount,convert_to)
         except:
             pass
@@ -190,7 +207,41 @@ class get():
         else:
             pass
     def get_gas_price(self):
-        print('Possibly making a `gas price` function here ?')
+        data = (f"Maybe a 'gas price' here ?")
+        echo(data)
+    def get_current_price(self):
+        btc_page = ('https://api.coindesk.com/v1/bpi/currentprice/usd.json')
+        page = (f'https://www.hashrate.no/')
+        page2 = (f"https://walletinvestor.com/converter/ethereum/usd/1")
+        retrieve = (self.session.get(page).text)
+        get_btc = (self.session.get(btc_page).text)
+        retrieve2 = (self.session.get(page2).text)
+        try:
+            btc_price = (re.findall('"rate":"(.*?)"',get_btc)[0])
+        except:
+            btc_price = (f'N/A')
+        try:
+            eth_price = (re.findall("ETH: <b>(.*?)</", retrieve)[0])
+        except:
+            eth_price = ('N/A')
+        try:
+            down = (re.findall('glyphicon-menu-down"></i> (.*?)</',retrieve2)[0])
+            down_clean = (down.replace(" ", ""))
+        except:
+            down = (re.findall('glyphicon-menu-up"></i> (.*?)</',retrieve2)[0])
+            down_clean = (down.replace(" ", ""))
+        if ('-') in down:
+            data = (f"{DRK}BTC Price{PNK}: {GRN}${GRN}{btc_price}")
+            echo(data)
+            loading(0.01)
+            data = (f"{DRK}ETH Price{PNK}: {GRN}{eth_price} {PNK}.::. {DRK}Down{PNK}: {RD}{down_clean}\r")
+            echo(data)
+        else:
+            data = (f"{DRK}BTC Price{PNK}: {GRN}${GRN}{btc_price}")
+            echo(data)
+            loading(0.01)
+            data = (f"{DRK}ETH Price{PNK}: {GRN}{eth_price} {PNK}.::. {DRK}Up{PNK}: {GRN}{down_clean}\r")
+            echo(data)
     def convert(self,currency,amount,convert_to):
         if convert_to == 'gbp':
             convert_symbol = ('£')
@@ -198,6 +249,8 @@ class get():
             convert_symbol = ('$')
         elif convert_to == 'cad':
             convert_symbol = ('$')
+        elif convert_to == 'eur':
+            convert_symbol = ('€')
         elif convert_to == 'eth':
             convert_symbol = ('♦')
         if convert_to == ('eth'):
@@ -212,11 +265,14 @@ class get():
                 currency_symbol = ('$')
             elif currency == 'cad':
                 currency_symbol = ('$')
+            elif currency == 'eur':
+                currency_symbol = ('€')
             elif currency == 'ethereum':
                 currency_symbol = ('♦')
+            loading(0.05)
             data = (f"{GRY}Converting{PNK}: {GRN}{currency_symbol}{amount} {currency.upper()[0:3]} {GRY}into{PNK}: {GRN}{convert_symbol}{raw} {convert_to.upper()} {DRK}[{GRN}■{DRK}]")
             echo(data)
-        elif currency == 'usd' or currency == 'gbp' or currency == 'cad':
+        elif currency == ('usd') or currency == ('gbp') or currency == ('cad') or currency == ('eur'):
             page = (f"https://walletinvestor.com/converter/{currency}/{convert_to}/{amount}")
             retrieve = (self.session.get(page).text)
             raw = (re.findall('converter-title-amount">(.*?)</span>',retrieve)[0])
@@ -226,8 +282,11 @@ class get():
                 currency_symbol = ('$')
             elif currency == 'cad':
                 currency_symbol = ('$')
+            elif currency == 'eur':
+                currency_symbol = ('€')
             elif currency == 'ethereum':
                 currency_symbol = ('♦')
+            loading(0.05)
             data = (f"{GRY}Converting{PNK}: {GRN}{currency_symbol}{amount} {currency.upper()} {GRY}into{PNK}: {GRN}{convert_symbol}{raw} {convert_to.upper()[0:3]} {DRK}[{GRN}■{DRK}]")
             echo(data)
     def get_mhs(self):
@@ -284,6 +343,8 @@ class get():
             monthly = (D(oned) * 30)
         except:
             oneday = ('N/A')
+            weekly = ('N/A')
+            monthly = ('N/A')
         try:
             test = (oneday.split('.')[1])
             roi = (re.findall(f"{test}</b></td><td>(.*?)</td", retrieve)[0])
@@ -447,6 +508,8 @@ class get():
                 monthly = (D(oned) * 30)
             except:
                 oneday = ('N/A')
+                weekly = ('N/A')
+                monthly = ('N/A')
             try:
                 test = (oneday.split('.')[1])
                 roi = (re.findall(f"{test}</b></td><td>(.*?)</td", retrieve)[0])
