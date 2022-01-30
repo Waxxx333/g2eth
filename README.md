@@ -45,6 +45,7 @@ options:
   -u, --usage           Advanced Usage
   -l, --list            List all cards capable of mining ETH
   -d, --all             List all cards capable of mining ETH and their stats
+  -p, --price           List all cards capable of mining ETH and their stats
   -c CONVERT, --convert CONVERT | Currency to conver ETH/USD/GBP
   -i INTO, --into INTO | Currency to convert into ETH/USD/GBP
   -n AMOUNT, --amount AMOUNT | Amount to convert
