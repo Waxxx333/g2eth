@@ -24,7 +24,7 @@
 
 ##### To install:
 ```python
-git clone https://github.com/Waxxx333/g2eth.git
+git clone --depth 1 https://github.com/Waxxx333/g2eth.git
 cd g2eth
 chmod +x install.sh
 ┌──[яoot@ᴡɪɴᴅᴏᴡꜱ95]-<g2eth>
@@ -32,7 +32,7 @@ chmod +x install.sh
 ```
 ##### Or simply run it:
 ```python
-https://github.com/Waxxx333/g2eth
+git clone --depth 1 https://github.com/Waxxx333/g2eth
 cd g2eth
 chmod +x g2eth
 ┌──[яoot@ᴡɪɴᴅᴏᴡꜱ95]-<g2eth>
