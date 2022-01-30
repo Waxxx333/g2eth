@@ -79,9 +79,9 @@ options:
 [■] Card name: NVIDIA CMP 90HX .:|:. Command name: cmp90
 [■] Card name: NVIDIA P106-100 .:|:. Command name: p106
 ```
-##### Convert USD/GBP to ETH or ETH to USD/GBP <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-light-mode-only" alt="python" align=left width=24><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-dark-mode-only" alt="python" align=left width=24><br>
+##### Convert USD/GBP/CAD to ETH or ETH to USD/GBP/CAD <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-light-mode-only" alt="python" align=left width=24><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-dark-mode-only" alt="python" align=left width=24><br>
 ```python
-g2eth --convert/-c [USD/GBP/ETH] --into/-i [USD/GBP/ETH] --amount/-n [AMOUNT]
+g2eth --convert/-c [USD/GBP/CAD/ETH] --into/-i [USD/GBP/CAD/ETH] --amount/-n [AMOUNT]
 ┌──[яoot@ᴡɪɴᴅᴏᴡꜱ95]-<g2eth>
 └─⋗ g2eth.py --convert eth --into usd --amount 20
 [■] Converting: ♦20.0 ETH into: $48508.72 USD [■]
