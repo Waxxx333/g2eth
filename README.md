@@ -103,6 +103,7 @@ g2eth --convert/-c [USD/GBP/CAD/ETH] --into/-i [USD/GBP/CAD/ETH] --amount/-n [AM
 - [ ] Make STDOUT <kbd>prettier</kbd> on Termux
 - [ ] Work on bash and zsh completion
 - [ ] Maybe a side-by-side comparison function
+- [ ] Add current ETH price function
   - [x] Add Canadian Dollars
   - [x] <strike>***Make <kbd>install.sh</kbd>***</strike> 
   - [x] <strike>***Create <kbd>requirements.txt</kbd>***</strike>
