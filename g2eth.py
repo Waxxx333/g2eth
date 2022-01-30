@@ -101,10 +101,10 @@ def usage():
 {PNK}./{GRN}{script} {RD}-c{GRN} 3060
 {GRY}List all cards capable of mining {GRN}ETH
 {PNK}./{GRN}{script} {RD}-l{PNK}/{RD}--list
-{GRY}Now has the ability to convert {GRN}GBP {GRY}or {GRN}USD {GRY}to {GRN}ETH {GRY}and vice versa{PNK}.
+{GRY}Now has the ability to convert {GRN}GBP{PNK}, {GRN}CAD {GRY}or {GRN}USD {GRY}to {GRN}ETH {GRY}and vice versa{PNK}.
 {GRY}Options{PNK}: 
-{GRN}{script} {RD}-c{PNK}/{RD}--currency {WHT}({GRN}eth {PNK} | {GRN}usd {PNK}| {GRN} gbp{WHT}) {RD}-t{PNK}/{RD}--to {WHT}({GRN}eth {PNK} | {GRN}usd {PNK}| {GRN} gbp{WHT}) {RD}-n{PNK}/{RD}--amount {GRN}10
-{GRY}Example syntax to convert {RD}0{PNK}.{RD}2 {GRN}ETH {GRY}into {GRN}GBP{PNK}/{GRN}USD{PNK}:
+{GRN}{script} {RD}-c{PNK}/{RD}--currency {WHT}({GRN}eth {PNK} | {GRN}usd {PNK}| {GRN} cad {PNK}| {GRN} gbp{WHT}) {RD}-t{PNK}/{RD}--to {WHT}({GRN}eth {PNK} | {GRN}usd {PNK}| {GRN} gbp {PNK}| {GRN} cad{WHT}) {RD}-n{PNK}/{RD}--amount {GRN}10
+{GRY}Example syntax to convert {RD}0{PNK}.{RD}2 {GRN}ETH {GRY}into {GRN}GBP{PNK}/{GRN}USD{PNK}/{GRN}CAD{PNK}:
 {GRN}{script} {RD}-c {GRN}eth {RD}-t {GRN}gbp {RD}-n {GRN}0.2 
 {GRY}Or convert {GRN}$175 USD {GRY}into {GRN}ETH{PNK}:
 {GRN}{script} {RD}-c {GRN}usd {RD}-t {GRN}eth {RD}-n {GRN}175
@@ -122,8 +122,8 @@ class get():
         parser.add_argument('-v', '--version' ,required=False, action=('store_true'), help=(f"{script} Version"))
         parser.add_argument('-l', '--list' ,required=False, action=('store_true'), help=(f"List all cards capable of mining ETH"))
         parser.add_argument('-d', '--all' ,required=False, action=('store_true'), help=(f"List all cards capable of mining ETH and their stats"))
-        parser.add_argument('-c', '--convert' ,required=False, action=('store'),type=(str.lower), help=(f"Currency to conver ETH/USD/GBP"))
-        parser.add_argument('-i', '--into' ,required=False, action=('store'),type=(str.lower), help=(f"Currency to convert into ETH/USD/GBP"))
+        parser.add_argument('-c', '--convert' ,required=False, action=('store'),type=(str.lower), help=(f"Currency to conver ETH/USD/GBP/CAD"))
+        parser.add_argument('-i', '--into' ,required=False, action=('store'),type=(str.lower), help=(f"Currency to convert into ETH/USD/GBP/CAD"))
         parser.add_argument('-n', '--amount' ,required=False, action=('store'),type=(float), help=(f"Amount to convert"))
         args = (parser.parse_args())
         if args.version:
@@ -145,7 +145,7 @@ class get():
                     echo(data)
                     exit(0);
                 if len(args.convert) != (3):
-                    data = (f"{RD}Error {PNK}'{RD}{args.convert}{PNK}' {DRK}not recognized{PNK}: {RD}Options are{PNK}: {GRN}eth{PNK}, {GRN}usd{PNK}, {GRN}gbp {DRK}[{RD}■{DRK}]")
+                    data = (f"{RD}Error {PNK}'{RD}{args.convert}{PNK}' {DRK}not recognized{PNK}: {RD}Options are{PNK}: {GRN}eth{PNK}, {GRN}usd{PNK}, {GRN}gbp{PNK},{GRN}cad {DRK}[{RD}■{DRK}]")
                     echo(data)
                 if ('eth') in (to_convert):
                     currency = ('ethereum')
@@ -153,9 +153,11 @@ class get():
                     currency = ('usd')
                 elif ('gbp') in (to_convert):
                     currency = ('gbp')
+                elif ('cad') in (to_convert):
+                    currency = ('cad')
                 
                 if len(args.into) <= (2):
-                    data = (f"{RD}Error {PNK}'{RD}{args.into}{PNK}' {DRK}not recognized{PNK}: {RD}Options are{PNK}: {GRN}eth{PNK}, {GRN}usd{PNK}, {GRN}gbp {DRK}[{RD}■{DRK}]")
+                    data = (f"{RD}Error {PNK}'{RD}{args.into}{PNK}' {DRK}not recognized{PNK}: {RD}Options are{PNK}: {GRN}eth{PNK}, {GRN}usd{PNK}, {GRN}gbp{PNK},{GRN}cad {DRK}[{RD}■{DRK}]")
                     echo(data)
                 else:
                     convert_to = (args.into)
@@ -194,6 +196,8 @@ class get():
             convert_symbol = ('£')
         elif convert_to == 'usd':
             convert_symbol = ('$')
+        elif convert_to == 'cad':
+            convert_symbol = ('$')
         elif convert_to == 'eth':
             convert_symbol = ('♦')
         if convert_to == ('eth'):
@@ -201,23 +205,26 @@ class get():
         if currency == ('ethereum'):
             page = (f"https://walletinvestor.com/converter/{currency}/{convert_to}/{amount}")
             retrieve = (self.session.get(page).text)
-            #converted = (f"{int(float(raw)):.2f}")
             raw = (re.findall('converter-title-amount">(.*?)</span>',retrieve)[0])
             if currency == 'gbp':
                 currency_symbol = ('£')
             elif currency == 'usd':
                 currency_symbol = ('$')
+            elif currency == 'cad':
+                currency_symbol = ('$')
             elif currency == 'ethereum':
                 currency_symbol = ('♦')
             data = (f"{GRY}Converting{PNK}: {GRN}{currency_symbol}{amount} {currency.upper()[0:3]} {GRY}into{PNK}: {GRN}{convert_symbol}{raw} {convert_to.upper()} {DRK}[{GRN}■{DRK}]")
             echo(data)
-        elif currency == 'usd' or currency == 'gbp':
+        elif currency == 'usd' or currency == 'gbp' or currency == 'cad':
             page = (f"https://walletinvestor.com/converter/{currency}/{convert_to}/{amount}")
             retrieve = (self.session.get(page).text)
             raw = (re.findall('converter-title-amount">(.*?)</span>',retrieve)[0])
             if currency == 'gbp':
                 currency_symbol = ('£')
             elif currency == 'usd':
+                currency_symbol = ('$')
+            elif currency == 'cad':
                 currency_symbol = ('$')
             elif currency == 'ethereum':
                 currency_symbol = ('♦')
