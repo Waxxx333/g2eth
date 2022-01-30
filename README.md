@@ -1,13 +1,13 @@
 ![Script](https://img.shields.io/badge/WaXxX-G2ETH-BF5B16?style=plastic&logo=Ethereum)
+![ETH](https://img.shields.io/badge/Ethereum-3C3C3D?style=plastic&logo=Ethereum&logoColor=orange)
+![Python](https://img.shields.io/badge/Python-FFD43B?style=plastic&logo=python&logoColor=darkgreen)
 ![g](https://img.shields.io/badge/GitHub-%2312100E.svg?&style=plastic&logo=Github&logoColor=BF5B16&?labelColor=BF5B16)
 ![Blah](https://img.shields.io/badge/Python3-RE-7A297B?style=plastic&logo=Python)
 ![fff](https://img.shields.io/badge/Python3-Requests-7A297B?style=plastic&logo=Python)
-![ETH](https://img.shields.io/badge/Ethereum-3C3C3D?style=plastic&logo=Ethereum&logoColor=orange)
-![Python](https://img.shields.io/badge/Python-FFD43B?style=plastic&logo=python&logoColor=darkgreen)
 
 
 # ***G2ETH***
-#### ***Get mining stats on given GPUs***
+#### ***Get mining stats on given GPUs && more***
 <p align="center">
   <img width="300" height="300" src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/python.svg">
   <img width="300" height="300" src="https://imgur.com/KHidht1.png">
@@ -101,6 +101,7 @@ g2eth --convert/-c [USD/GBP/ETH] --into/-i [USD/GBP/ETH] --amount/-n [AMOUNT]
 - [ ] Make installer work in Winblows
 - [ ] Make installer work with Termux
 - [ ] Make STDOUT <kbd>prettier</kbd> on Termux
+- [ ] Work on bash and zsh completion
   - [x] <strike>***Make <kbd>install.sh</kbd>***</strike> 
   - [x] <strike>***Create <kbd>requirements.txt</kbd>***</strike>
 
