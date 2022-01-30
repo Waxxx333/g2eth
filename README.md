@@ -102,6 +102,7 @@ g2eth --convert/-c [USD/GBP/ETH] --into/-i [USD/GBP/ETH] --amount/-n [AMOUNT]
 - [ ] Make installer work with Termux
 - [ ] Make STDOUT <kbd>prettier</kbd> on Termux
 - [ ] Work on bash and zsh completion
+- [ ] Maybe a side-by-side comparison function
   - [x] <strike>***Make <kbd>install.sh</kbd>***</strike> 
   - [x] <strike>***Create <kbd>requirements.txt</kbd>***</strike>
 
