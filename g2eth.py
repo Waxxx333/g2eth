@@ -119,12 +119,18 @@ class get():
         parser.add_argument('-g', '--gpu', required=False, action=('store'),help=(f'{GRN}GPU to search for'))
         parser.add_argument('-h', '--help',action='help', default=argparse.SUPPRESS,help=(f'Show this help menu'))
         parser.add_argument('-u', '--usage' ,required=False, action=('store_true'), help=(f"Advanced Usage"))
+        parser.add_argument('-v', '--version' ,required=False, action=('store_true'), help=(f"{script} Version"))
         parser.add_argument('-l', '--list' ,required=False, action=('store_true'), help=(f"List all cards capable of mining ETH"))
         parser.add_argument('-d', '--all' ,required=False, action=('store_true'), help=(f"List all cards capable of mining ETH and their stats"))
         parser.add_argument('-c', '--convert' ,required=False, action=('store'),type=(str.lower), help=(f"Currency to conver ETH/USD/GBP"))
         parser.add_argument('-i', '--into' ,required=False, action=('store'),type=(str.lower), help=(f"Currency to convert into ETH/USD/GBP"))
         parser.add_argument('-n', '--amount' ,required=False, action=('store'),type=(float), help=(f"Amount to convert"))
         args = (parser.parse_args())
+        if args.version:
+            icon()
+            data = (f"{DRK}Version: {GRN}{script} {PNK}{version} {DRK}[{GRN}■{DRK}]")
+            echo(data)
+            exit(0);
         try:
             if args.convert:
                 to_convert = (args.convert)
@@ -195,7 +201,8 @@ class get():
         if currency == ('ethereum'):
             page = (f"https://walletinvestor.com/converter/{currency}/{convert_to}/{amount}")
             retrieve = (self.session.get(page).text)
-            converted = (f"{int(float(raw)):.2f}")
+            #converted = (f"{int(float(raw)):.2f}")
+            raw = (re.findall('converter-title-amount">(.*?)</span>',retrieve)[0])
             if currency == 'gbp':
                 currency_symbol = ('£')
             elif currency == 'usd':
