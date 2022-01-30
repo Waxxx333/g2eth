@@ -19,7 +19,7 @@
 <hr>
 
 ### Get ETH mining stats on a given GPU
-##### **Returns current Bitcoin price, current ***ETH*** price, ***ETH*** hashrate of the given GPU, daily, weekly and monthly estimated profit, year the GPU was released, ROI(Return of Investment), Power consumption, efficiency and TDP. Also lists all 54 cards capable of mining ***ETH*** and their ***ETH*** mining stats.** ***g2eth*** also has a USD/GBP to ETH converter and vice versa.
+##### **Returns current Bitcoin price, current ***ETH*** price, ***ETH*** hashrate of the given GPU, daily, weekly and monthly estimated profit, year the GPU was released, ROI(Return of Investment), Power consumption, efficiency and TDP. Also lists all 54 cards capable of mining ***ETH*** and their ***ETH*** mining stats.** ***g2eth*** also has a USD/GBP/CAD to ETH converter and vice versa.
 <hr>
 
 ##### To install:
@@ -103,7 +103,7 @@ g2eth --convert/-c [USD/GBP/ETH] --into/-i [USD/GBP/ETH] --amount/-n [AMOUNT]
 - [ ] Make STDOUT <kbd>prettier</kbd> on Termux
 - [ ] Work on bash and zsh completion
 - [ ] Maybe a side-by-side comparison function
-- [ ] Add Canadian Dollars
+  - [x] Add Canadian Dollars
   - [x] <strike>***Make <kbd>install.sh</kbd>***</strike> 
   - [x] <strike>***Create <kbd>requirements.txt</kbd>***</strike>
 
