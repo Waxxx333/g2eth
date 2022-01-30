@@ -114,7 +114,7 @@ g2eth --convert/-c [USD/GBP/ETH] --into/-i [USD/GBP/ETH] --amount/-n [AMOUNT]
   <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/nvidia.svg" width="75" height="75">
 </p>
 
-### Author: WaXxX
+### Author:
 <a href="https://twitter.com/waxxx333"><img src="https://img.shields.io/badge/-WaXxX-E34F26?style=plastic&logo=Windows%2095&logoColor=white"></a>
 
 <hr><hr>
