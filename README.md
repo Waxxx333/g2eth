@@ -41,7 +41,6 @@ options:
   -h, --help            Show this help menu
   -u, --usage           Advanced Usage
   -l, --list            List all cards capable of mining ETH
-  -d, --all             List all cards capable of mining ETH and their stats
   -p, --price           Show BTC and ETH price
   -c CONVERT, --convert CONVERT | Currency to conver ETH/USD/GBP
   -i INTO, --into INTO | Currency to convert into ETH/USD/GBP
@@ -114,23 +113,24 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
   <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/nvidia.svg" width="75" height="75">
 </p>
 
-### Author:
 <a href="https://twitter.com/waxxx333"><img src="https://img.shields.io/badge/-WaXxX-E34F26?style=plastic&logo=Windows%2095&logoColor=white"></a>
 
 <hr><hr>
 <!--
-* 0.0.1
-    * Work in progress
+* <kbd>1.3</kbd>
+    * Updated code accordingly to source's code change
 -->
 
-
 <details>
-  <summary><kbd>Recent updates</kbd></summary>
+  <summary><kbd>Changes</kbd></summary>
   <ul>
     <li><b>Added function to convert ETH to USD/GBP and vice versa</li>
     <li><b>Added function to list ALL cards and all of their stats</li>
     <li><b>Shows <kbd>+/-</kbd> ETH</li>
     <li>Added price function</li>
     <li>Added CAD and EUR to the converter</li>
+    <li>Updated script according to the source's source code change(Source: let me know if there's a problem with this project)</li>
+    <li>Fixed conversion decimal problem</li>
+    <li>Got rid of redundant "list all and stat" function</li>
     </ul>
 </details>
