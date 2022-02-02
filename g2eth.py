@@ -1,12 +1,10 @@
 #!/bin/python3
-from json import load
-from locale import currency
 import requests, re, argparse, os, sys, random;
 from time import sleep;
 from decimal import Decimal as D;
 DB=("\033[01;38;5;21m")
 RD=("\033[01;38;5;9m")
-PNK=("\033[01;38;5;13m")
+PNK=("\033[01;38;5;201m")
 PRP=("\033[01;38;5;55m")
 GRN=("\033[01;38;5;10m")
 DRK=("\033[01;38;5;242m")
@@ -16,7 +14,7 @@ NVD=("\033[1;42;97m")
 AMD=("\033[1;41;97m")
 RESET=("\033[0m")
 LOAD=("\033[1;49;32m")
-version = (1.1)
+version = (1.3)
 if (os.path.isdir('/data/data/com.termux')):
     OS = ('Termux')
 elif ('linux') in (sys.platform):
@@ -124,7 +122,6 @@ class get():
         parser.add_argument('-u', '--usage' ,required=False, action=('store_true'), help=(f"Advanced Usage"))
         parser.add_argument('-v', '--version' ,required=False, action=('store_true'), help=(f"{script} Version"))
         parser.add_argument('-l', '--list' ,required=False, action=('store_true'), help=(f"List all cards capable of mining ETH"))
-        parser.add_argument('-d', '--all' ,required=False, action=('store_true'), help=(f"List all cards capable of mining ETH and their stats"))
         parser.add_argument('-p', '--price' ,required=False, action=('store_true'), help=(f"Show BTC and ETH price"))
         parser.add_argument('-c', '--convert' ,required=False, action=('store'),type=(str.lower), help=(f"Currency to conver ETH/USD/GBP/CAD/EUR"))
         parser.add_argument('-i', '--into' ,required=False, action=('store'),type=(str.lower), help=(f"Currency to convert into ETH/USD/GBP/CAD/EUR"))
@@ -181,8 +178,6 @@ class get():
                 self.convert(currency,amount,convert_to)
         except:
             pass
-        if args.all:
-            self.list_and_stat()
         if args.list:
             icon()
             loading(.2)
@@ -259,6 +254,7 @@ class get():
             page = (f"https://walletinvestor.com/converter/{currency}/{convert_to}/{amount}")
             retrieve = (self.session.get(page).text)
             raw = (re.findall('converter-title-amount">(.*?)</span>',retrieve)[0])
+            converted = (f"{int(float(raw)):.2f}")
             if currency == 'gbp':
                 currency_symbol = ('£')
             elif currency == 'usd':
@@ -270,12 +266,13 @@ class get():
             elif currency == 'ethereum':
                 currency_symbol = ('♦')
             loading(0.05)
-            data = (f"{GRY}Converting{PNK}: {GRN}{currency_symbol}{amount} {currency.upper()[0:3]} {GRY}into{PNK}: {GRN}{convert_symbol}{raw} {convert_to.upper()} {DRK}[{GRN}■{DRK}]")
+            data = (f"{GRY}Converting{PNK}: {GRN}{currency_symbol}{amount} {currency.upper()[0:3]} {GRY}into{PNK}: {GRN}{convert_symbol}{converted} {convert_to.upper()} {DRK}[{GRN}■{DRK}]")
             echo(data)
         elif currency == ('usd') or currency == ('gbp') or currency == ('cad') or currency == ('eur'):
             page = (f"https://walletinvestor.com/converter/{currency}/{convert_to}/{amount}")
             retrieve = (self.session.get(page).text)
             raw = (re.findall('converter-title-amount">(.*?)</span>',retrieve)[0])
+            converted = (f"{int(float(raw)):.2f}")
             if currency == 'gbp':
                 currency_symbol = ('£')
             elif currency == 'usd':
@@ -313,31 +310,17 @@ class get():
         except:
             eth_rate = ('N/A')
         try:
-            rvn_rate = (re.findall("RVN</a></font></td><td>(.*?)</", retrieve)[0])
-        except:
-            rvn_rate = ('N/A')
-        try:
-            msrp = (re.findall("<tr><td>MSRP: </td><td>(.*?)</", retrieve)[0])
-        except:
-            msrp = ('N/A')
-        try:
-            release_date = (re.findall("Released: </td><td>(.*?)</", retrieve)[0])
-        except:
-            release_date = ('N/A')
-        try:
-            tdp = (re.findall("TDP: </td><td>(.*?)</", retrieve)[0])
-        except:
-            tdp = ('N/A')
-        try:
-            power = (re.findall(f"ETH</a></th></tr><tr><td>Hashrate:</td><td>{eth_rate}</td></tr><tr><td>Power:</td><td>(.*?)</", retrieve)[0])
+            power = (re.findall(f"{eth_rate}</td><td><b>(.*?)</", retrieve)[0])
+            power2 = (re.findall(f"{power}</b><br />(.*?)</", retrieve)[0])
         except:
             power = ('N/A')
+            power2 = ('N/A')
         try:
-            efficiency = (re.findall(f"ETH</a></font></td><td>{eth_rate}</td><td>{power}</td><td>(.*?)</", retrieve)[0])
+            efficiency = (re.findall(f"{power}</b><br />{power2}</td><td>(.*?)</", retrieve)[0])
         except:
             efficiency = ('N/A')
         try:
-            oneday = (re.findall(f"ETH</a></font></td><td>{eth_rate}</td><td>{power}</td><td>{efficiency}</td><td><b>(.*?)</", retrieve)[0])
+            oneday = (re.findall(f"{power2}</td><td>{efficiency}</td><td><b>(.*?)</", retrieve)[0])
             oned = oneday.rsplit('$')[1]
             weekly = (D(oned) * 7)
             monthly = (D(oned) * 30)
@@ -345,6 +328,26 @@ class get():
             oneday = ('N/A')
             weekly = ('N/A')
             monthly = ('N/A')
+        try:
+            oneday2 = (re.findall(f"{efficiency}</td><td><b>{oneday}</b><br />(.*?)</", retrieve)[0])
+        except:
+            oneday2 = ('N/A')
+        try:
+            rvn_rate = (re.findall("RVN</a></font></td><td>(.*?)</", retrieve)[0])
+        except:
+            rvn_rate = ('N/A')
+        try:
+            msrp = (re.findall("MSRP: (.*?)Released:", retrieve)[0])
+        except:
+            msrp = ('N/A')
+        try:
+            release_date = (re.findall("Released:(.*?)TDP:", retrieve)[0])
+        except:
+            release_date = ('N/A')
+        try:
+            tdp = (re.findall("TDP: </td><td>(.*?)</", retrieve)[0])
+        except:
+            tdp = ('N/A')
         try:
             test = (oneday.split('.')[1])
             roi = (re.findall(f"{test}</b></td><td>(.*?)</td", retrieve)[0])
@@ -381,7 +384,7 @@ class get():
                 data = (f"{DRK}ROI{PNK}: {GRN}{roi} {PNK}.::. {DRK}Efficiency{PNK} {GRN}{efficiency}")
                 echo(data)
                 loading(0.05)
-                data = (f"{DRK}TDP{PNK}: {GRN}{tdp} {PNK}.::. {DRK}Power{PNK}: {GRN}{power}")
+                data = (f"{DRK}TDP{PNK}: {GRN}{tdp} {PNK}.::. {DRK}Power{PNK}: {GRN}{power} {PNK}:: {GRN}{power2}")
                 echo(data)          
             elif "AMD" in gpu:
                 gpu_name = (f"{AMD}{gpu}{RESET} {DRK}[{GRN}■{DRK}]")
@@ -445,127 +448,4 @@ class get():
             data = (f"{RD}Error{PNK}: {DRK}Keyboard Interruption {DRK}[{RD}■{DRK}]")
             echo(data)
             exit(0);
-    def list_and_stat(self):
-        btc_page = ('https://api.coindesk.com/v1/bpi/currentprice/usd.json')
-        get_btc = (self.session.get(btc_page).text)
-        page = (f'https://www.hashrate.no/')
-        retrieve = (self.session.get(page).text)
-        try:
-            btc_price = (re.findall('"rate":"(.*?)"',get_btc)[0])
-        except:
-            btc_price = (f'N/A')
-        try:
-            eth_price = (re.findall("ETH: <b>(.*?)</", retrieve)[0])
-        except:
-            eth_price = ('N/A')
-        data = (f"{DRK}BTC Price{PNK}: {GRN}${GRN}{btc_price} {PNK}.::. {DRK}ETH Price{PNK}: {GRN}{eth_price}")
-        echo(data)
-        loading(0.05)
-        page = (f'https://www.hashrate.no/')
-        retrieve1 = (self.session.get(page).text)
-        all_cards = (list(set(re.findall(f"href=/(.*?)>", retrieve1))))
-        loading(.2)
-        for a in all_cards:
-            sep = ('')
-            page2 = (f'https://www.hashrate.no/{a}')
-            retrieve = (self.session.get(page2).text)
-            try:
-                gpu = (re.findall("<title>(.*?) -",retrieve)[0])
-            except:
-                gpu = (f'N/A')
-            try:
-                eth_rate = (re.findall("ETH</a></font></td><td>(.*?)</", retrieve)[0])
-            except:
-                eth_rate = ('N/A')
-            try:
-                rvn_rate = (re.findall("RVN</a></font></td><td>(.*?)</", retrieve)[0])
-            except:
-                rvn_rate = ('N/A')
-            try:
-                msrp = (re.findall("<tr><td>MSRP: </td><td>(.*?)</", retrieve)[0])
-            except:
-                msrp = ('N/A')
-            try:
-                release_date = (re.findall("Released: </td><td>(.*?)</", retrieve)[0])
-            except:
-                release_date = ('N/A')
-            try:
-                tdp = (re.findall("TDP: </td><td>(.*?)</", retrieve)[0])
-            except:
-                tdp = ('N/A')
-            try:
-                power = (re.findall(f"ETH</a></th></tr><tr><td>Hashrate:</td><td>{eth_rate}</td></tr><tr><td>Power:</td><td>(.*?)</", retrieve)[0])
-            except:
-                power = ('N/A')
-            try:
-                efficiency = (re.findall(f"ETH</a></font></td><td>{eth_rate}</td><td>{power}</td><td>(.*?)</", retrieve)[0])
-            except:
-                efficiency = ('N/A')
-            try:
-                oneday = (re.findall(f"ETH</a></font></td><td>{eth_rate}</td><td>{power}</td><td>{efficiency}</td><td><b>(.*?)</", retrieve)[0])
-                oned = oneday.rsplit('$')[1]
-                weekly = (D(oned) * 7)
-                monthly = (D(oned) * 30)
-            except:
-                oneday = ('N/A')
-                weekly = ('N/A')
-                monthly = ('N/A')
-            try:
-                test = (oneday.split('.')[1])
-                roi = (re.findall(f"{test}</b></td><td>(.*?)</td", retrieve)[0])
-            except:
-                roi = ('N/A')
-            try:
-                if "NVIDIA" in gpu:
-                    color = ('NVD')
-                    gpu_name = (f"{NVD}{gpu}{RESET} {DRK}[{GRN}■{DRK}]")
-                    data = (f"{gpu_name}")
-                    echo(data)
-                    loading(.2)
-                    data = (f"{GRN}ETH {DRK}Hashrate{PNK}({GRN}DaggerHashimoto{PNK}){PNK}: {GRN}{eth_rate} {PNK}") 
-                    echo(data)
-                    loading(0.02)
-                    data = (f"{DRK}24h{PNK}: {GRN}{oneday}{PNK} / {DRK}Weekly{PNK}: {GRN}${weekly}{PNK} / {DRK}Monthly{PNK}: {GRN}${monthly}")
-                    echo(data)
-                    loading(0.02)
-                    data = (f"{DRK}Released{PNK}: {GRN}{release_date} {PNK}.::. {DRK}MSRP{PNK}: {GRN}{msrp} ")
-                    echo(data)
-                    loading(0.02)
-                    data = (f"{DRK}ROI{PNK}: {GRN}{roi} {PNK}.::. {DRK}Efficiency{PNK} {GRN}{efficiency}")
-                    echo(data)
-                    loading(0.02)
-                    data = (f"{DRK}TDP{PNK}: {GRN}{tdp} {PNK}.::. {DRK}Power{PNK}: {GRN}{power}")
-                    echo(data)      
-                    data = (f"{DRK}══════════════════════════════════════════════ {DRK}[{GRN}■{DRK}]")
-                    echo(data)    
-                elif "AMD" in gpu:
-                    color = ('AMD')
-                    gpu_name = (f"{AMD}{gpu}{RESET} {DRK}[{GRN}■{DRK}]")
-                    data = (f"{gpu_name}")
-                    echo(data)
-                    loading(.2)
-                    data = (f"{DRK}BTC Price{PNK}: {RD}${btc_price} {PNK}.::. {DRK}ETH Price{PNK}: {RD}{eth_price}")
-                    echo(data)
-                    loading(0.02)
-                    data = (f"{RD}ETH {DRK}Hashrate{PNK}({RD}DaggerHashimoto{PNK}){PNK}: {RD}{eth_rate} {PNK}") 
-                    echo(data)
-                    loading(0.02)
-                    data = (f"{DRK}24h{PNK}: {RD}{oneday}{PNK}/{DRK}Weekly{PNK}: {RD}${weekly}{PNK}/{DRK}Monthly{PNK}: {RD}${monthly}")
-                    echo(data)
-                    loading(0.02)
-                    data = (f"{DRK}Released{PNK}: {RD}{release_date} {PNK}.::. {DRK}MSRP{PNK}: {RD}{msrp} ")
-                    echo(data)
-                    loading(0.02)
-                    data = (f"{DRK}ROI{PNK}: {RD}{roi} {PNK}.::. {DRK}Efficiency{PNK} {RD}{efficiency}")
-                    echo(data)
-                    loading(0.02)
-                    data = (f"{DRK}TDP{PNK}: {RD}{tdp} {PNK}.::. {DRK}Power{PNK}: {RD}{power}")
-                    echo(data)
-                    data = (f"{DRK}══════════════════════════════════════════════ {DRK}[{GRN}■{DRK}]")
-                    echo(data)
-                loading(1)
-            except KeyboardInterrupt:
-                data = (f"{RD}Error{PNK}: {DRK}Keyboard Interruption {DRK}[{RD}■{DRK}]")
-                echo(data)
-                exit(0);
 get()
