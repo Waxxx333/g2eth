@@ -14,9 +14,21 @@
 <hr>
 
 ### Get ETH mining stats on a given GPU
-##### **Returns current Bitcoin price, current ***ETH*** price, ***ETH*** hashrate of the given GPU, daily, weekly and monthly estimated profit, year the GPU was released, ROI(Return of Investment), Power consumption, efficiency and TDP.** 
-##### **Lists all cards capable of mining ***ETH*** and their ***ETH*** mining stats.** ***g2eth*** **also has a USD/GBP/CAD/EUR to ETH converter and vice versa.**
-##### **Check the current ETH and BTC prices.**
+##### **Returns current Bitcoin price, current ***ETH*** price, ***ETH*** hashrate of the given GPU, daily, weekly and monthly estimated profit, year the GPU was released, ROI(Return of Investment), Power consumption, efficiency and TDP.**  **Lists all cards capable of mining ***ETH*** and their ***ETH*** mining stats.** ***g2eth*** **also has a USD/GBP/CAD/EUR to ETH converter and vice versa.**. **Check the current ETH and BTC prices.**
+##### 
+
+##### Features:
+* Get mining stats on GPUs
+  *  Get ETH hash rate on a supplied GPU
+  *  Get current ETH price
+  *  Get current BTC price
+  *  Daily, weekly and monthly estimated earnings
+  *  MSRP, Release year, projected ROI, TDP, Efficiency, Power consumption
+* List all GPUs capable of mining ETH
+* Convert ETH to USD/GBP/CAD/EUR and vice versa (USD/CAD/GBP/EUR to ETH)
+* Get current ETH and BTC price and status
+
+
 <hr>
 
 ##### To install:
@@ -105,7 +117,10 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
   - [x] <strike>***Make <kbd>install.sh</kbd>***</strike> 
   - [x] <strike>***Create <kbd>requirements.txt</kbd>***</strike>
 
-
+<p align="center">
+  <img src="https://i.imgur.com/LJhlqM2.png" width="200" height="200">
+</p>
+  
 <p align="center">
   <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg" width="75" height="75">
   <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/python.svg" width="75" height="75">
