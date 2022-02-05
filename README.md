@@ -5,6 +5,8 @@
 ![Blah](https://img.shields.io/badge/Python3-RE-7A297B?style=plastic&logo=Python)
 ![fff](https://img.shields.io/badge/Python3-Requests-7A297B?style=plastic&logo=Python)
 
+
+
 # ***G2ETH***
 <p align="center">
   <img width="300" height="300" src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/python.svg">
@@ -117,10 +119,22 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
   - [x] <strike>***Make <kbd>install.sh</kbd>***</strike> 
   - [x] <strike>***Create <kbd>requirements.txt</kbd>***</strike>
 
+
+<hr><hr>
+
+<h1 align="center">Screenshot</h1>
+
 <p align="center">
-  <img src="https://i.imgur.com/LJhlqM2.png" width="200" height="200">
+  <img src="https://i.imgur.com/LJhlqM2.png" width="600" height="500">
 </p>
   
+  
+<hr><hr>
+
+<p align="center">
+  <a href="https://twitter.com/waxxx333"><img src="https://img.shields.io/badge/-WaXxX-E34F26?style=plastic&logo=Windows%2095&logoColor=white"></a>
+</p>
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg" width="75" height="75">
   <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/python.svg" width="75" height="75">
@@ -128,9 +142,9 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
   <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/nvidia.svg" width="75" height="75">
 </p>
 
-<a href="https://twitter.com/waxxx333"><img src="https://img.shields.io/badge/-WaXxX-E34F26?style=plastic&logo=Windows%2095&logoColor=white"></a>
 
 <hr><hr>
+
 <!--
 * <kbd>1.3</kbd>
     * Updated code accordingly to source's code change
@@ -149,3 +163,6 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
     <li>Got rid of redundant "list all and stat" function</li>
     </ul>
 </details>
+
+
+##### GPU stats are from [hashrate.no](https://hashrate.no)
