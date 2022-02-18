@@ -23,9 +23,9 @@ elif grep -qi "opensuse" /etc/os-release; then
     export DISTRO="openSUSE" 
 fi
 install_script() {
-    if [[ ${shell} == 'zsh' && -d /usr/share/zsh/functions/Completion/Linux ]] || [[ ${shell} == 'bash' && -d /usr/share/bash-completion/completions/ ]]; then
+    if [[ ${shell} == 'zsh' && -d /usr/share/zsh/functions/Completion/Linux/ ]] || [[ ${shell} == 'bash' && -d /usr/share/bash-completion/completions/ ]]; then
     echo -e "${DRK}[${GRN}+${DRK}] ${GRN}Shell for ${PNK}${user} ${GRN}detected${PNK}:: ${GRN}${shell} ${DRK}[${GRN}+${DRK}]"
-    echo -e "${DRK}Would you like to install a tab completion script for ${GRN}${cleaned} ?\n${DRK}[${RD}!${DRK}] ${RD}This will require a password ${DRK}[${RD}!${DRK}]"
+    echo -e "${GRN}Would you like to install a tab completion script for ${PNK}${cleaned} ?"
     read -p "[y/n]::$ " choice
         if [[ ${choice} == [yY] || ${choice} == [yY][eE][sS] ]]; then
             completion="True"
@@ -35,17 +35,20 @@ install_script() {
                 completion_script=./completion/g2eth.bash
             fi
         fi
+    else
+        echo -e "${RD}[!] ${GRN}${cleaned} ${RD}has tab completion but it looks like you don't have tab completion installed ${DRK}[${RD}!${DRK}]"
+        echo -e "${GRN}You can manually install completion for ${PNK}${shell} ${GRN}and then rerun this installation script"
     fi
 	echo -e "${DRK}Attempting to install ${GRN}${script} ${DRK}locally for ${GRN}${user}"
     if [[ -d $HOME/.local/bin/ ]]; then
-        echo -e "${DRK}Copying to ${GRN}$HOME/.local/bin"
+        echo -e "${GRN}Copying ${PNK}${script} ${GRN}to ${PNK}$HOME/.local/bin/${cleaned}"
         cp ${script} $HOME/.local/bin/g2eth
         if [[ ${completion} == 'True' ]]; then
             if [[ ${shell} == 'zsh' ]]; then
-                echo -e "Installing ${completion_script}"
+                echo -e "${GRN}Copying ${PNK}${completion_script} ${GRN}to ${PNK}/usr/share/zsh/functions/Completion/Linux/"
                 sudo cp ${completion_script} /usr/share/zsh/functions/Completion/Linux/_g2eth
             elif [[ ${shell} == 'bash' ]]; then
-                echo -e "Installing ${completion_script}"
+                echo -e "${GRN}Copying ${PNK}${completion_script} ${GRN}to ${PNK}/usr/share/bash-completion/completions/"
                 sudo cp ${completion_script} /usr/share/bash-completion/completions/g2eth
             fi
         fi
@@ -57,10 +60,10 @@ install_script() {
             sudo cp ${script} /bin/g2eth
             if [[ ${completion} == 'True' ]]; then
                 if [[ ${shell} == 'zsh' ]]; then
-                    echo -e "Installing ${completion_script}"
+                    echo -e "${GRN}Copying ${PNK}${completion_script} ${GRN}to ${PNK}/usr/share/zsh/functions/Completion/Linux/"
                     sudo cp ${completion_script} /usr/share/zsh/functions/Completion/Linux/_g2eth
                 elif [[ ${shell} == 'bash' ]]; then
-                    echo -e "Installing ${completion_script}"
+                    echo -e "${GRN}Copying ${PNK}${completion_script} ${GRN}to ${PNK}/usr/share/bash-completion/completions/"
                     sudo cp ${completion_script} /usr/share/bash-completion/completions/g2eth
                 fi
             fi
