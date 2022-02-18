@@ -110,7 +110,7 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
 ###### G2ETH now has tab completion if you install it via <kbd>install.sh</kbd>. You must be using <kbd>zsh</kbd> or <kbd>bash</kbd> and you also need to have <kbd>bash-completion</kbd> for <kbd>bash</kbd> or <kbd>zsh-completions</kbd> for <kbd>zsh</kbd>. Run the install script, close your shell, reopen a shell and type <kbd>g2eth --</kbd> (***two hyphens***) and press ***tab***.
 
 
-<hr><hr>
+<hr>
 
 <h1 align="center">Screenshots</h1>
 
@@ -118,23 +118,7 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
   <img src="https://i.imgur.com/Dt8Q56c.png" width="670" height="900">
   <img src="https://i.imgur.com/SxDR9aQ.png" width="670" height="500">
 </p>
-  
-  
-<hr>
 
-<p align="center">
-  <a href="https://twitter.com/waxxx333"><img src="https://img.shields.io/badge/-WaXxX-E34F26?style=plastic&logo=Windows%2095&logoColor=white"></a>
-</p>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg" width="75" height="75">
-  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/python.svg" width="75" height="75">
-  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/amd.svg" width="75" height="75">
-  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/nvidia.svg" width="75" height="75">
-</p>
-
-
-<hr>
 
 <!--
 * <kbd>1.3</kbd>
@@ -169,3 +153,18 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
   - [x] Work on bash and zsh completion
 
 ##### GPU stats are from [hashrate.no](https://hashrate.no)
+
+  
+<hr>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg" width="75" height="75">
+  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/python.svg" width="75" height="75">
+  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/amd.svg" width="75" height="75">
+  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/nvidia.svg" width="75" height="75">
+</p>
+<p align="center">
+  <a href="https://twitter.com/waxxx333"><img src="https://img.shields.io/badge/-WaXxX-E34F26?style=plastic&logo=Windows%2095&logoColor=white"></a>
+</p>
+
+<hr>
