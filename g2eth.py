@@ -9,12 +9,12 @@ PRP=("\033[01;38;5;55m")
 GRN=("\033[01;38;5;10m")
 DRK=("\033[01;38;5;242m")
 WHT=("\033[01;38;5;15m")
+ORN=("\033[01;38;5;202m")
 GRY=("\033[01;38;5;242m")
 NVD=("\033[1;42;97m")
 AMD=("\033[1;41;97m")
 RESET=("\033[0m")
 LOAD=("\033[1;49;32m")
-version = (1.3)
 if (os.path.isdir('/data/data/com.termux')):
     OS = ('Termux')
 elif ('linux') in (sys.platform):
@@ -27,18 +27,9 @@ if ('.py') in script:
 counter = [0]
 currency_options = ['usd', 'gbp', 'cad', 'eur', 'eth']
 CHARS = ('/', '-', '\\', '|')
-Agents = [
-    'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36',
-    'Mozilla/5.0 (X11; U; Linux x86_64; en-us) AppleWebKit/531.2+ (KHTML, like Gecko) Version/5.0 Safari/531.2+',
-    'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; de) Opera 8.02',
-    'Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0',
-    'Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:83.0) Gecko/20100101 Firefox/83.0',
-    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36',
-    'Mozilla/5.0 (X11; Linux x86_64; rv:82.0) Gecko/20100101 Firefox/82.0',
-    'Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0',
-    'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:77.0) Gecko/20100101 Firefox/77.0'
-]
-
+Agent = ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36')
+def cls():
+    os.system('clear')
 def loading(duration):	
     for i in range(10):
         counter[0] += 1
@@ -84,6 +75,7 @@ def icon():
 def usage():
     info = (f"""{PRP}({RD}Doesn't work with {GRN}GTX {WHT}1050{PNK}/{WHT}1050{GRN}ti {RD}\u2639 {PRP}){DRK}
 {GRY}Mining {GRN}Ethereum {GRY}requires {RD}>4GB {GRN}VRAM{PNK}. {GRY}Therefore{PNK}, {GRY}you {RD}cannot {GRY}mine {GRN}ETH {GRY}with a {GRN}1050{PNK}. 
+{DRK}Information received from {GRN}{script} {DRK}is thanks to {ORN}https{PNK}://{ORN}hashrate.no
 {GRY}Formatting the {GRN}GPU {GRY}in your command{PNK}:
       {NVD}NVIDIA{RESET}{DRK} 
 {GRN}3060 {WHT}({GRN}NVIDIA RTX 3060 {PNK}({WHT}Non-LHR{PNK}){WHT})
@@ -115,7 +107,7 @@ def usage():
 class get():
     def __init__(self) -> None:
         self.session = requests.Session()
-        self.session.headers.update({'User-Agent':f"{random.choice(Agents)}"})
+        self.session.headers.update({'User-Agent':f"{Agent}"})
         parser = argparse.ArgumentParser(description=f'{GRN}{script} ETH mining stats',add_help=False)
         parser.add_argument('-g', '--gpu', required=False, action=('store'),help=(f'{GRN}GPU to search for'))
         parser.add_argument('-h', '--help',action='help', default=argparse.SUPPRESS,help=(f'Show this help menu'))
@@ -179,8 +171,10 @@ class get():
         except:
             pass
         if args.list:
+            data = (f"{DRK}Stats brought to you by{PNK}: {GRN}https{DRK}://{GRN}hashrate.no {DRK}[{GRN}■{DRK}]")
+            echo(data)
+            sleep(1);
             icon()
-            loading(.2)
             self.list_cards()
             exit(0);
         if args.usage:
@@ -196,6 +190,9 @@ class get():
                 echo(data)
                 exit(0)
             else:
+                data = (f"{DRK}Stats brought to you by{PNK}: {GRN}https{DRK}://{GRN}hashrate.no {DRK}[{GRN}■{DRK}]")
+                echo(data)
+                sleep(1);
                 self.card = (args.gpu)
                 icon()
                 self.get_mhs()

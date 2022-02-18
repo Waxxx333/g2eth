@@ -1,12 +1,28 @@
 #!/bin/bash
-script=("g2eth")
+script=("g2eth.py")
+cleaned=("$(echo ${script} | cut -d'.' -f1)")
 RD=("\033[01;38;5;9m")
 PNK=("\033[01;38;5;13m")
 PRP=("\033[01;38;5;55m")
 GRN=("\033[01;38;5;10m")
 DRK=("\033[01;38;5;242m")
 WHT=("\033[01;38;5;15m")
-Version=(0)
+user=(${USER})
+Version=(0.4)
+shell=$(basename $SHELL)
+if [[ ${shell} == 'zsh' ]] || [[ ${shell} == 'bash' ]]; then
+    echo -e "${DRK}[${GRN}+${DRK}] ${GRN}Shell for ${PNK}${user} ${GRN}detected${PNK}:: ${GRN}${shell} ${DRK}[${GRN}+${DRK}]"
+    echo -e "${DRK}Would you like to install a tab completion script for ${GRN}${cleaned} ?\n${DRK}[${RD}!${DRK}] ${RD}This will require a password ${DRK}[${RD}!${DRK}]"
+    read -p "[y/n]::$ " choice
+    if [[ ${choice} == [yY] || ${choice} == [yY][eE][sS] ]]; then
+        completion="True"
+        if [[ ${shell} == 'zsh' ]]; then
+            completion_script=./completion/g2eth.zsh
+        elif [[ ${shell} == 'bash' ]]; then
+            completion_script=./completion/g2eth.bash
+        fi
+    fi
+fi
 echo -e "${DRK}Getting ready to install ${GRN}${script}"
 echo -e "${DRK}Making ${GRN}${script} ${DRK}executable $(chmod +x ${script})"
 if grep -qi "arch" /etc/os-release; then
@@ -19,15 +35,34 @@ elif grep -qi "opensuse" /etc/os-release; then
     export DISTRO="openSUSE" 
 fi
 install_script() {
+	echo -e "${DRK}Attempting to install ${GRN}${script} ${DRK}locally for ${GRN}${user}"
     if [[ -d $HOME/.local/bin/ ]]; then
         echo -e "${DRK}Copying to ${GRN}$HOME/.local/bin"
-        cp ${script} $HOME/.local/bin
+        cp ${script} $HOME/.local/bin/g2eth
+        if [[ ${completion} == 'True' ]]; then
+            if [[ ${shell} == 'zsh' ]]; then
+                echo -e "Installing ${completion_script}"
+                sudo cp ${completion_script} /usr/share/zsh/functions/Completion/Linux/_g2eth
+            elif [[ ${shell} == 'bash' ]]; then
+                echo -e "Installing ${completion_script}"
+                sudo cp ${completion_script} /usr/share/bash-completion/completions/g2eth
+            fi
+        fi
     else
         echo -e "Copy file to /bin ? This will require your password."
         read -p ">>> " answer3
         if [[ ${answer3} == [yY] || ${answer3} == [yY][eE][sS] ]]; then
             chmod +x ${script}
-            sudo cp ${script} /bin/
+            sudo cp ${script} /bin/g2eth
+            if [[ ${completion} == 'True' ]]; then
+                if [[ ${shell} == 'zsh' ]]; then
+                    echo -e "Installing ${completion_script}"
+                    sudo cp ${completion_script} /usr/share/zsh/functions/Completion/Linux/_g2eth
+                elif [[ ${shell} == 'bash' ]]; then
+                    echo -e "Installing ${completion_script}"
+                    sudo cp ${completion_script} /usr/share/bash-completion/completions/g2eth
+                fi
+            fi
         elif [[ ${answer3} == [nN] || ${answer3} == [nN][oO] ]]; then
             echo -e "${GRN}You can still run the script with${PNK}:\n./${GRN}${script} ${DRK}[${RD}-u${PNK}/${RD}--usage ${PNK}| ${RD}-c${PNK}/${RD}--card ${WHT}(${GRN}3060lhr ${PNK}| ${RD}580${WHT}) ${PNK}| ${RD}-l${PNK}/${RD}--list${DRK}]"
             echo -e "${RD}Or${PNK}:\n${GRN}python3 ${script} ${DRK}[${RD}-u${PNK}/${RD}--usage ${PNK}| ${RD}-c${PNK}/${RD}--card ${PNK}| ${RD}-l${PNK}/${RD}--list${DRK}]"
