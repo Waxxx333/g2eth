@@ -15,6 +15,7 @@ NVD=("\033[1;42;97m")
 AMD=("\033[1;41;97m")
 RESET=("\033[0m")
 LOAD=("\033[1;49;32m")
+version=(0.8)
 if (os.path.isdir('/data/data/com.termux')):
     OS = ('Termux')
 elif ('linux') in (sys.platform):
