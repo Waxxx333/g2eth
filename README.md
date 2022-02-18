@@ -109,26 +109,14 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
 
 ###### G2ETH now has tab completion if you install it via <kbd>install.sh</kbd>. You must be using <kbd>zsh</kbd> or <kbd>bash</kbd> and you also need to have <kbd>bash-completion</kbd> for <kbd>bash</kbd> or <kbd>zsh-completions</kbd> for <kbd>zsh</kbd>. Run the install script, close your shell, reopen a shell and type <kbd>g2eth --</kbd> (***two hyphens***) and press ***tab***.
 
-* To Do
-- [ ] Add more distros' package managers to the installer
-- [ ] Make installer work in Winblows
-- [ ] Make installer work with Termux
-- [ ] Make STDOUT <kbd>prettier</kbd> on Termux
-- [ ] Maybe a side-by-side comparison function
-  - [x] <strike>***Add current ETH price function***</strike>
-  - [x] <strike>***Add Canadian Dollars***</strike>
-  - [x] <strike>***Make <kbd>install.sh</kbd>***</strike> 
-  - [x] <strike>***Create <kbd>requirements.txt</kbd>***</strike>
-  - [x] Work on bash and zsh completion
-
 
 <hr><hr>
 
 <h1 align="center">Screenshots</h1>
 
 <p align="center">
-  <img src="https://i.imgur.com/LJhlqM2.png" width="665" height="500">
-  <img src="https://i.imgur.com/SxDR9aQ.png" width="665" height="500">
+  <img src="https://i.imgur.com/Dt8Q56c.png" width="670" height="900">
+  <img src="https://i.imgur.com/SxDR9aQ.png" width="670" height="500">
 </p>
   
   
@@ -168,5 +156,16 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
     </ul>
 </details>
 
+> To Do
+- [ ] Add more distros' package managers to the installer
+- [ ] Make installer work in Winblows
+- [ ] Make installer work with Termux
+- [ ] Make STDOUT <kbd>prettier</kbd> on Termux
+- [ ] Maybe a side-by-side comparison function
+  - [x] <strike>***Add current ETH price function***</strike>
+  - [x] <strike>***Add Canadian Dollars***</strike>
+  - [x] <strike>***Make <kbd>install.sh</kbd>***</strike> 
+  - [x] <strike>***Create <kbd>requirements.txt</kbd>***</strike>
+  - [x] Work on bash and zsh completion
 
 ##### GPU stats are from [hashrate.no](https://hashrate.no)
