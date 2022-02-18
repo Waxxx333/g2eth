@@ -10,21 +10,9 @@ WHT=("\033[01;38;5;15m")
 user=(${USER})
 Version=(0.4)
 shell=$(basename $SHELL)
-if [[ ${shell} == 'zsh' ]] || [[ ${shell} == 'bash' ]]; then
-    echo -e "${DRK}[${GRN}+${DRK}] ${GRN}Shell for ${PNK}${user} ${GRN}detected${PNK}:: ${GRN}${shell} ${DRK}[${GRN}+${DRK}]"
-    echo -e "${DRK}Would you like to install a tab completion script for ${GRN}${cleaned} ?\n${DRK}[${RD}!${DRK}] ${RD}This will require a password ${DRK}[${RD}!${DRK}]"
-    read -p "[y/n]::$ " choice
-    if [[ ${choice} == [yY] || ${choice} == [yY][eE][sS] ]]; then
-        completion="True"
-        if [[ ${shell} == 'zsh' ]]; then
-            completion_script=./completion/g2eth.zsh
-        elif [[ ${shell} == 'bash' ]]; then
-            completion_script=./completion/g2eth.bash
-        fi
-    fi
-fi
 echo -e "${DRK}Getting ready to install ${GRN}${script}"
-echo -e "${DRK}Making ${GRN}${script} ${DRK}executable $(chmod +x ${script})"
+echo -e "${DRK}Making ${GRN}${script} ${DRK}executable"
+chmod +x ${script}
 if grep -qi "arch" /etc/os-release; then
     export DISTRO="Arch" 
 elif grep -qi "debian" /etc/os-release; then
@@ -35,6 +23,19 @@ elif grep -qi "opensuse" /etc/os-release; then
     export DISTRO="openSUSE" 
 fi
 install_script() {
+    if [[ ${shell} == 'zsh' && -d /usr/share/zsh/functions/Completion/Linux ]] || [[ ${shell} == 'bash' && -d /usr/share/bash-completion/completions/ ]]; then
+    echo -e "${DRK}[${GRN}+${DRK}] ${GRN}Shell for ${PNK}${user} ${GRN}detected${PNK}:: ${GRN}${shell} ${DRK}[${GRN}+${DRK}]"
+    echo -e "${DRK}Would you like to install a tab completion script for ${GRN}${cleaned} ?\n${DRK}[${RD}!${DRK}] ${RD}This will require a password ${DRK}[${RD}!${DRK}]"
+    read -p "[y/n]::$ " choice
+        if [[ ${choice} == [yY] || ${choice} == [yY][eE][sS] ]]; then
+            completion="True"
+            if [[ ${shell} == 'zsh' ]]; then
+                completion_script=./completion/g2eth.zsh
+            elif [[ ${shell} == 'bash' ]]; then
+                completion_script=./completion/g2eth.bash
+            fi
+        fi
+    fi
 	echo -e "${DRK}Attempting to install ${GRN}${script} ${DRK}locally for ${GRN}${user}"
     if [[ -d $HOME/.local/bin/ ]]; then
         echo -e "${DRK}Copying to ${GRN}$HOME/.local/bin"
