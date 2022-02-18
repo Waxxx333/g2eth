@@ -9,7 +9,7 @@
 
 # ***G2ETH***
 <p align="center">
-  <img width="300" height="300" src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/python.svg">
+  <!--<img width="300" height="300" src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/python.svg">-->
   <img width="300" height="300" src="https://imgur.com/KHidht1.png">
 </p>
 
@@ -19,7 +19,7 @@
 ##### **Returns current Bitcoin price, current ***ETH*** price, ***ETH*** hashrate of the given GPU, daily, weekly and monthly estimated profit, year the GPU was released, ROI(Return of Investment), Power consumption, efficiency and TDP.**  **Lists all cards capable of mining ***ETH*** and their ***ETH*** mining stats.** ***g2eth*** **also has a USD/GBP/CAD/EUR to ETH converter and vice versa.**. **Check the current ETH and BTC prices.**
 ##### 
 
-##### Features:
+##### Available statistics:
 * Get mining stats on GPUs
   *  Get ETH hash rate on a supplied GPU
   *  Get current ETH price
@@ -107,29 +107,32 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
 ###### **For** ***Windows*** and ***Termux*** **you will have to manually install python-requests**. **You will need <kbd>pip</kbd> if you're on Windows or Termux to install <kbd>requests</kbd>.** **I will be fixing this at some point. Right now the installer supports: **openSUSE, Arch-based distros, Debian-based distros and Fedora**
 ###### **This script doesn't work for ***GTX 1050*** cards as because you need ***<kbd>>4GB</kbd>*** ***VRAM*** to mine ***ETH*****. 
 
+###### G2ETH now has tab completion if you install it via <kbd>install.sh</kbd>. You must be using <kbd>zsh</kbd> or <kbd>bash</kbd> and you also need to have <kbd>bash-completion</kbd> for <kbd>bash</kbd> or <kbd>zsh-completions</kbd> for <kbd>zsh</kbd>. Run the install script, close your shell, reopen a shell and type <kbd>g2eth --</kbd> (***two hyphens***) and press ***tab***.
+
 * To Do
 - [ ] Add more distros' package managers to the installer
 - [ ] Make installer work in Winblows
 - [ ] Make installer work with Termux
 - [ ] Make STDOUT <kbd>prettier</kbd> on Termux
-- [ ] Work on bash and zsh completion
 - [ ] Maybe a side-by-side comparison function
   - [x] <strike>***Add current ETH price function***</strike>
   - [x] <strike>***Add Canadian Dollars***</strike>
   - [x] <strike>***Make <kbd>install.sh</kbd>***</strike> 
   - [x] <strike>***Create <kbd>requirements.txt</kbd>***</strike>
+  - [x] Work on bash and zsh completion
 
 
 <hr><hr>
 
-<h1 align="center">Screenshot</h1>
+<h1 align="center">Screenshots</h1>
 
 <p align="center">
-  <img src="https://i.imgur.com/LJhlqM2.png" width="600" height="500">
+  <img src="https://i.imgur.com/LJhlqM2.png" width="665" height="500">
+  <img src="https://i.imgur.com/SxDR9aQ.png" width="665" height="500">
 </p>
   
   
-<hr><hr>
+<hr>
 
 <p align="center">
   <a href="https://twitter.com/waxxx333"><img src="https://img.shields.io/badge/-WaXxX-E34F26?style=plastic&logo=Windows%2095&logoColor=white"></a>
@@ -143,7 +146,7 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
 </p>
 
 
-<hr><hr>
+<hr>
 
 <!--
 * <kbd>1.3</kbd>
@@ -161,6 +164,7 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
     <li>Updated script according to the source's source code change(Source: let me know if there's a problem with this project)</li>
     <li>Fixed conversion decimal problem</li>
     <li>Got rid of redundant "list all and stat" function</li>
+    <li>Added zsh and bash tab completion</li>
     </ul>
 </details>
 
