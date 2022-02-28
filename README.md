@@ -16,7 +16,9 @@
 <hr>
 
 ### Get ETH mining stats on a given GPU
-##### **Returns current Bitcoin price, current ***ETH*** price, ***ETH*** hashrate of the given GPU, daily, weekly and monthly estimated profit, year the GPU was released, ROI(Return of Investment), Power consumption, efficiency and TDP.**  **Lists all cards capable of mining ***ETH*** and their ***ETH*** mining stats.** ***g2eth*** **also has a USD/GBP/CAD/EUR to ETH converter and vice versa.**. **Check the current ETH and BTC prices.**
+##### **Returns current Bitcoin price, current ***ETH*** price, ***ETH*** hashrate of the given GPU, daily, weekly and monthly estimated profit, year the GPU was released, ROI(Return of Investment), Power consumption, efficiency and TDP.**  **Lists all cards capable of mining ***ETH*** and their ***ETH*** mining stats.** ***g2eth*** <strike>**also has a USD/GBP/CAD/EUR to ETH converter and vice versa.**</strike>. Over 150 currencies have been added to the conversion function. 
+
+**Check the current ETH and BTC prices.**
 ##### 
 
 ##### Available statistics:
@@ -27,8 +29,24 @@
   *  Daily, weekly and monthly estimated earnings
   *  MSRP, Release year, projected ROI, TDP, Efficiency, Power consumption
 * List all GPUs capable of mining ETH
-* Convert ETH to USD/GBP/CAD/EUR and vice versa (USD/CAD/GBP/EUR to ETH)
+* Convert over 150 currencies
 * Get current ETH and BTC price and status
+  * You can now also specify other coins to get a current price on
+
+### ***Some*** of the currencies supported:
+* AUR - Auroracoin
+* BCC - BitConnect (inactive)
+* BCH - Bitcoin Cash
+* BTC or XBT - Bitcoin
+* DASH - Dash
+* DOGE or XDG - Dogecoin
+* EOS - EOS.IO
+* ETC - Ethereum Classic
+* ETH - Ether (also known as Ethereum)
+* GRC - Gridcoin
+* LTC - Litecoin
+* KOI or COYE - Coinye (inactive)
+* And so many more 
 
 
 <hr>
@@ -84,18 +102,37 @@ options:
 ###### <kbd>-l/--list</kbd> arg will give something like the following. The name after <kbd>Command name:</kbd> is the name you'll use to search the GPU by.
 ```python
 ┌──[яoot@ᴡɪɴᴅᴏᴡꜱ95]-<g2eth>
-└─⋗ ./g2eth.py -l
+└─⋗ g2eth -l
 [■] Card name: NVIDIA GTX 1080 .:|:. Command name: 1080
 [■] Card name: AMD RX 6800 .:|:. Command name: 6800
 [■] Card name: NVIDIA CMP 90HX .:|:. Command name: cmp90
 [■] Card name: NVIDIA P106-100 .:|:. Command name: p106
 ```
-##### Convert USD/GBP/CAD/EUR to ETH or ETH to USD/GBP/CAD/EUR <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-light-mode-only" alt="python" align=left width=24><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-dark-mode-only" alt="python" align=left width=24><br>
+##### Convert over 150 currencies from a local currency to crypto or vice versa <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-light-mode-only" alt="python" align=left width=24><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-dark-mode-only" alt="python" align=left width=24><br>
 ```python
 g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amount/-n [AMOUNT]
 ┌──[яoot@ᴡɪɴᴅᴏᴡꜱ95]-<g2eth>
-└─⋗ g2eth.py --convert eth --into usd --amount 20
-[■] Converting: ♦20.0 ETH into: $48508.72 USD [■]
+└─⋗ g2eth -c usd -i grc -n 10 
+[■] Conversion is courtesy of: cryps.info
+[■] 10.0 USD to GRC (US Dollar to Gridcoin)  [■]
+[■] 10.0 U$D == 1,132.95960772 GRC [■]
+```
+
+#### Now you can get current prices on more coins than ETH and BTC. Usage is as follows:
+###### <kbd>Just check Bitcoin and Ethereum</kbd>
+```python
+┌──[яoot@ᴡɪɴᴅᴏᴡꜱ95]-<g2eth>
+└─⋗ g2eth -p
+[■] ₿TC Price: $37,875.6767
+[■] ΞTH Price: $2611 .::. Down: -3.83634
+```
+##### <kbd>Get price of a custom coin:</kbd>
+```python
+┌──[яoot@ᴡɪɴᴅᴏᴡꜱ95]-<g2eth>
+└─⋗ g2eth -p Dogecoin
+[■] DOGE Price: $0.1228
+[■] ₿TC Price: $37,875.6767
+[■] ΞTH Price: $2611 .::. Down: -3.83634
 ```
 <hr>
 
@@ -115,8 +152,9 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
 <h1 align="center">Screenshots</h1>
 
 <p align="center">
-  <img src="https://i.imgur.com/Dt8Q56c.png" width="670" height="900">
-  <img src="https://i.imgur.com/SxDR9aQ.png" width="670" height="500">
+  <img src="https://i.imgur.com/Dt8Q56c.png" width="710" height="900">
+  <img src="https://i.imgur.com/SxDR9aQ.png" width="710" height="500">
+   <img src="https://i.imgur.com/CcbfYKE.png" width="710" height="500">
 </p>
 
 
@@ -137,6 +175,7 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
     <li>Fixed conversion decimal problem</li>
     <li>Got rid of redundant "list all and stat" function</li>
     <li>Added zsh and bash tab completion</li>
+    <li>Added over 150 currencies to the conversion function</li>
     </ul>
 </details>
 
@@ -146,14 +185,21 @@ g2eth --convert/-c [USD/GBP/CAD/EUR/ETH] --into/-i [USD/GBP/CAD/EUR/ETH] --amoun
 - [ ] Make installer work with Termux
 - [ ] Make STDOUT <kbd>prettier</kbd> on Termux
 - [ ] Maybe a side-by-side comparison function
+  - [x] Make the ***price check*** function have more currencies
   - [x] <strike>***Add current ETH price function***</strike>
   - [x] <strike>***Add Canadian Dollars***</strike>
   - [x] <strike>***Make <kbd>install.sh</kbd>***</strike> 
   - [x] <strike>***Create <kbd>requirements.txt</kbd>***</strike>
   - [x] Work on bash and zsh completion
+  - [x] Add more currencies to the conversion function
 
-##### GPU stats are from [hashrate.no](https://hashrate.no)
+##### All information is scraped, no APIs are being used.
 
+GPU stats are from [hashrate.no](https://hashrate.no)
+
+Price conversions are from [cryps.info](https://www.cryps.info/)
+
+Price checks are from: [coinmarketcap](https://coinmarketcap.com), [hashrate.io](https://www.hashrate.no/), and [walletinvestor](https://walletinvestor.com)
   
 <hr>
 
