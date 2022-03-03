@@ -4,8 +4,7 @@
 ![g](https://img.shields.io/badge/GitHub-%2312100E.svg?&style=plastic&logo=Github&logoColor=BF5B16&?labelColor=BF5B16)
 ![Blah](https://img.shields.io/badge/Python3-RE-7A297B?style=plastic&logo=Python)
 ![fff](https://img.shields.io/badge/Python3-Requests-7A297B?style=plastic&logo=Python)
-
-
+[![BTC Tip Jar](https://img.shields.io/badge/BTC-DONATE%20HERE-orange.svg?logo=bitcoin&style=flat)](https://www.blockchain.com/btc/address/bc1q7057d3g5vp8zrtcttcq6cz8fmqxhl8yt27kqdt)
 
 # ***★G2ETH★*** <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-light-mode-only" alt="python" align=left width=24><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ethereum.svg#gh-dark-mode-only" alt="python" align=left width=24><br>
 <p align="center">
@@ -238,6 +237,9 @@ Price checks are from: [coinmarketcap](https://coinmarketcap.com), [hashrate.io]
 </p>
 <p align="center">
   <a href="https://twitter.com/waxxx333"><img src="https://img.shields.io/badge/-WaXxX-E34F26?style=plastic&logo=Windows%2095&logoColor=white"></a>
+  <a href="https://www.blockchain.com/btc/address/bc1q7057d3g5vp8zrtcttcq6cz8fmqxhl8yt27kqdt"><img src="https://img.shields.io/badge/BTC-DONATE%20HERE-orange.svg?logo=bitcoin&style=flat"></a>
+  <a href="https://www.blockchain.com/btc/address/bc1q7057d3g5vp8zrtcttcq6cz8fmqxhl8yt27kqdt"><br>bc1q7057d3g5vp8zrtcttcq6cz8fmqxhl8yt27kqdt</a>
 </p>
-
+  
 <hr>
+
